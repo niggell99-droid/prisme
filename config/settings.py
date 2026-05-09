@@ -16,15 +16,21 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+from dotenv import load_dotenv
+env_path = os.path.join(BASE_DIR, '.env')
+if os.path.exists(env_path):
+    load_dotenv(env_path)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-b3wt7s!@tqc700at+pc3&f8kq+8a=^h@k$b-^p89_0#3a9mi7e'
+#SECRET_KEY = 'django-insecure-b3wt7s!@tqc700at+pc3&f8kq+8a=^h@k$b-^p89_0#3a9mi7e'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 ALLOWED_HOSTS = []
 
@@ -109,9 +115,11 @@ DATABASES = {
 }
 
 # Override with DATABASE_URL if present (e.g., in production)
-# conn_max_age=600 is a good default for performance in production
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
+if os.environ.get('DATABASE_URL'):
+    DATABASES['default'] = dj_database_url.config(
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
 
 
 # Password validation
@@ -260,10 +268,7 @@ LOGIN_URL = 'login'
 # Allauth Configuration (Updated for latest version)
 ACCOUNT_LOGIN_METHODS = {'email', 'username'}
 ACCOUNT_EMAIL_VERIFICATION = "optional"
-# ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE is deprecated in favor of fields
-# ACCOUNT_USERNAME_REQUIRED is deprecated in favor of fields
-# ACCOUNT_EMAIL_REQUIRED is deprecated in favor of fields
-ACCOUNT_SIGNUP_FIELDS = ['email', 'username', 'password1'] # password1 = required password
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
 
 # Social Providers Configuration (Placeholders)
 SOCIALACCOUNT_PROVIDERS = {
@@ -281,4 +286,15 @@ SOCIALACCOUNT_PROVIDERS = {
         'SCOPE': ['email', 'public_profile'],
     }
     # Apple configuration usually requires key files
+}
+
+# DATABASE_URL override is handled above in the Database section
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
 }

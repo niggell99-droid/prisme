@@ -59,7 +59,9 @@
   function toggleTheme() {
     const isDark = !body.classList.contains("dark-mode");
     applyTheme(isDark);
-    try { localStorage.setItem(DARK_KEY, JSON.stringify(isDark)); } catch (e) { }
+    try {
+      localStorage.setItem(DARK_KEY, JSON.stringify(isDark));
+    } catch (e) {}
   }
 
   // ===== Search overlay (version animée et optimisée) =====
@@ -89,7 +91,7 @@
         setNoScroll(false);
         if (searchFullInput) searchFullInput.value = "";
       },
-      { once: true }
+      { once: true },
     );
   }
 
@@ -125,7 +127,8 @@
       inlineSearchBtn.addEventListener("click", (e) => {
         e.preventDefault();
         const q = inlineSearchInput.value.trim();
-        if (q) window.location.href = `./search.html?q=${encodeURIComponent(q)}`;
+        if (q)
+          window.location.href = `./search.html?q=${encodeURIComponent(q)}`;
         else inlineSearchInput.focus();
       });
     }
@@ -178,7 +181,7 @@
         () => {
           mobileMenu.classList.remove("closing", "open");
         },
-        { once: true }
+        { once: true },
       );
       mobileMenuOverlay.classList.remove("active");
       setNoScroll(false);
@@ -188,7 +191,9 @@
     if (hamburger) {
       hamburger.addEventListener("click", () => {
         if (window.innerWidth <= MOBILE_BREAKPOINT) {
-          mobileMenu?.classList.contains("open") ? closeMobileMenu() : openMobileMenu();
+          mobileMenu?.classList.contains("open")
+            ? closeMobileMenu()
+            : openMobileMenu();
         } else {
           toggleDesktopNav();
         }
@@ -204,8 +209,10 @@
     }
 
     // Fermetures
-    if (closeMobileMenuBtn) closeMobileMenuBtn.addEventListener("click", closeMobileMenu);
-    if (mobileMenuOverlay) mobileMenuOverlay.addEventListener("click", closeMobileMenu);
+    if (closeMobileMenuBtn)
+      closeMobileMenuBtn.addEventListener("click", closeMobileMenu);
+    if (mobileMenuOverlay)
+      mobileMenuOverlay.addEventListener("click", closeMobileMenu);
     if (navOverlay) navOverlay.addEventListener("click", closeDesktopNav);
 
     // Close on Escape
@@ -218,13 +225,23 @@
     });
 
     // Resize adaptation
-    window.addEventListener("resize", () => {
-      if (window.innerWidth > MOBILE_BREAKPOINT && mobileMenu?.classList.contains("open")) {
-        closeMobileMenu();
-      } else if (window.innerWidth <= MOBILE_BREAKPOINT && navlinks?.classList.contains("open")) {
-        closeDesktopNav();
-      }
-    }, { passive: true });
+    window.addEventListener(
+      "resize",
+      () => {
+        if (
+          window.innerWidth > MOBILE_BREAKPOINT &&
+          mobileMenu?.classList.contains("open")
+        ) {
+          closeMobileMenu();
+        } else if (
+          window.innerWidth <= MOBILE_BREAKPOINT &&
+          navlinks?.classList.contains("open")
+        ) {
+          closeDesktopNav();
+        }
+      },
+      { passive: true },
+    );
 
     // Fermer nav desktop quand un lien est cliqué (mobile)
     if (navlinks) {
@@ -253,8 +270,11 @@
   let ticking = false;
 
   function updateTarget() {
-    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop;
+    const scrollHeight =
+      document.documentElement.scrollHeight -
+      document.documentElement.clientHeight;
     targetWidth = (scrollTop / scrollHeight) * 100;
     requestTick();
   }
@@ -282,5 +302,3 @@
 
   window.addEventListener("scroll", updateTarget, { passive: true });
 })();
-
-

@@ -11,11 +11,15 @@ django-ckeditor-5==0.2.19
 django-debug-toolbar==6.2.0
 django-js-asset==3.1.2
 django-unfold==0.76.0
+gunicorn==25.1.0
 idna==3.11
 oauthlib==3.3.1
+packaging==26.0
 pillow==12.0.0
+psycopg2-binary==2.9.11
 pycparser==2.23
 PyJWT==2.10.1
+python-dotenv==1.2.1
 requests==2.32.5
 requests-oauthlib==2.0.0
 sqlparse==0.5.3
