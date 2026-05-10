@@ -30,9 +30,9 @@ print("🌱 Démarrage de la population de la base de données...\n")
 print("1️⃣ Création des utilisateurs...")
 
 users_data = [
-    {'username': 'alice', 'email': 'alice@polymath.local', 'first_name': 'Alice', 'last_name': 'Dupont'},
-    {'username': 'bob', 'email': 'bob@polymath.local', 'first_name': 'Bob', 'last_name': 'Martin'},
-    {'username': 'charlie', 'email': 'charlie@polymath.local', 'first_name': 'Charlie', 'last_name': 'Durand'},
+    {'username': 'alice', 'email': 'alice@prisme.local', 'first_name': 'Alice', 'last_name': 'Dupont'},
+    {'username': 'bob', 'email': 'bob@prisme.local', 'first_name': 'Bob', 'last_name': 'Martin'},
+    {'username': 'charlie', 'email': 'charlie@prisme.local', 'first_name': 'Charlie', 'last_name': 'Durand'},
 ]
 
 users = {}

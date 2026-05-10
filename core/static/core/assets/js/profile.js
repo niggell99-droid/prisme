@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Exemple d’utilisateur simulé
   const user = JSON.parse(localStorage.getItem("user")) || {
-    name: "Utilisateur Polymath",
-    email: "user@polymath.com",
+    name: "Utilisateur Prisme",
+    email: "user@prisme.com",
     avatar: "../assets/images/avatar-default.svg"
   };
 
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Exemple d’utilisateur simulé
   const user = JSON.parse(localStorage.getItem("user")) || {
     name: "Isabelle Malaji",
-    email: "isabelle@polymath.com",
+    email: "isabelle@prisme.com",
     avatar: "" // Laisse vide pour déclencher la génération auto
   };
 
@@ -120,7 +120,7 @@ function generateAvatar(name) {
 document.addEventListener("DOMContentLoaded", () => {
   const user = JSON.parse(localStorage.getItem("user")) || {
     name: "Isabelle Malaji",
-    email: "isabelle@polymath.com",
+    email: "isabelle@prisme.com",
     avatar: "" // vide => génère un avatar dynamique
   };
 
@@ -254,7 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const bioField = document.getElementById("bio");
 
   // Charger le profil existant
-  const userData = JSON.parse(localStorage.getItem("polymath_user") || "{}");
+  const userData = JSON.parse(localStorage.getItem("prisme_user") || "{}");
   if (userData.name) nameField.value = userData.name;
   if (userData.email) emailField.value = userData.email;
   if (userData.bio) bioField.value = userData.bio;
@@ -271,7 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
       domain: userData.domain || "Génie mécanique",
       location: userData.location || "RDC"
     };
-    localStorage.setItem("polymath_user", JSON.stringify(updatedUser));
+    localStorage.setItem("prisme_user", JSON.stringify(updatedUser));
     alert("✅ Profil mis à jour avec succès !");
   });
 
@@ -281,7 +281,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const emailNotif = document.getElementById("email-notifs");
   const compactMode = document.getElementById("compact-mode");
 
-  const prefs = JSON.parse(localStorage.getItem("polymath_prefs") || "{}");
+  const prefs = JSON.parse(localStorage.getItem("prisme_prefs") || "{}");
   darkToggle.checked = prefs.darkMode || false;
   langSelect.value = prefs.language || "fr";
   emailNotif.checked = prefs.emailNotif || false;
@@ -300,7 +300,7 @@ document.addEventListener("DOMContentLoaded", () => {
       emailNotif: emailNotif.checked,
       compactMode: compactMode.checked
     };
-    localStorage.setItem("polymath_prefs", JSON.stringify(updatedPrefs));
+    localStorage.setItem("prisme_prefs", JSON.stringify(updatedPrefs));
     alert("✅ Préférences enregistrées !");
   });
 });
@@ -312,7 +312,7 @@ document.addEventListener("DOMContentLoaded", () => {
   fetch("../footer.html").then(r => r.text()).then(f => document.querySelector("#footer-placeholder").innerHTML = f);
 
   // Charger les infos utilisateur depuis localStorage
-  const user = JSON.parse(localStorage.getItem("polymath_user") || "{}");
+  const user = JSON.parse(localStorage.getItem("prisme_user") || "{}");
 
   document.getElementById("user-name").textContent = user.name || "Nom d’utilisateur";
   document.getElementById("user-bio").textContent = user.bio || "Aucune bio disponible.";
@@ -330,7 +330,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const base64 = reader.result;
       document.getElementById("user-avatar").src = base64;
       user.avatar = base64;
-      localStorage.setItem("polymath_user", JSON.stringify(user));
+      localStorage.setItem("prisme_user", JSON.stringify(user));
     };
     reader.readAsDataURL(file);
   });

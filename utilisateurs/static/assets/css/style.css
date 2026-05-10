@@ -268,7 +268,7 @@ a {
 	background: #fff;
 }
 
-/* === Barre de progression du scroll Polymath === */
+/* === Barre de progression du scroll Prisme === */
 .scroll-progress {
 	position: fixed;
 	top: var(--navbar-height, 60px); /* Ajuste selon la hauteur de ta nav */

@@ -139,7 +139,7 @@
         {% endif %}
         {% else %}
         <div style="text-align: center; padding: 4rem; background: rgba(30, 41, 59, 0.4); border-radius: 16px;">
-            <h2 style="margin-bottom: 1rem;">Rechercher sur Polymath</h2>
+            <h2 style="margin-bottom: 1rem;">Rechercher sur Prisme</h2>
             <p style="color: var(--muted); margin-bottom: 2rem;">Utilisez la barre de recherche pour trouver des
                 articles, projets ou discussions</p>
             <form action="{% url 'search' %}" method="get"

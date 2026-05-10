@@ -23,9 +23,9 @@ class Command(BaseCommand):
         self.stdout.write('1. Creation des utilisateurs...')
 
         users_data = [
-            {'username': 'alice', 'email': 'alice@polymath.local', 'first_name': 'Alice', 'last_name': 'Dupont'},
-            {'username': 'bob', 'email': 'bob@polymath.local', 'first_name': 'Bob', 'last_name': 'Martin'},
-            {'username': 'charlie', 'email': 'charlie@polymath.local', 'first_name': 'Charlie', 'last_name': 'Durand'},
+            {'username': 'alice', 'email': 'alice@prisme.local', 'first_name': 'Alice', 'last_name': 'Dupont'},
+            {'username': 'bob', 'email': 'bob@prisme.local', 'first_name': 'Bob', 'last_name': 'Martin'},
+            {'username': 'charlie', 'email': 'charlie@prisme.local', 'first_name': 'Charlie', 'last_name': 'Durand'},
         ]
 
         users = {}

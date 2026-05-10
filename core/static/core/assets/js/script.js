@@ -23,7 +23,7 @@
 
   // Utilities
   const NO_SCROLL = "no-scroll";
-  const DARK_KEY = "polymath_dark_mode";
+  const DARK_KEY = "prisme_dark_mode";
   const MOBILE_BREAKPOINT = 900;
 
   function setNoScroll(enabled) {
