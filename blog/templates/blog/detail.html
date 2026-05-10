@@ -1,6 +1,6 @@
 {% extends 'core/base.html' %}
 {% load static %}
-{% block title %}{{ article.title }} - Polymath{% endblock %}
+{% block title %}{{ article.title }} - Prisme{% endblock %}
 
 {% block content %}
 <link rel='stylesheet' href='{% static ' core/assets/css/project.css' %}?v=4'>
@@ -721,7 +721,7 @@
         alt="{{ article.author.username }}" class="author-avatar">
       <div class="author-info">
         <h3>{{ article.author.username }}</h3>
-        <p>Auteur sur Polymath</p>
+        <p>Auteur sur Prisme</p>
         <a href="{% url 'profil_detail' article.author.pk %}" class="author-link">
           Voir le profil
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"

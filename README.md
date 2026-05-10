@@ -1,2 +1,2 @@
-# polymath
+# prisme
 média specialisée  en ingénierie

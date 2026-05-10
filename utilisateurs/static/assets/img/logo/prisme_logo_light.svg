@@ -7,6 +7,6 @@
   </defs>
   <rect width="220" height="60" rx="12" fill="white"></rect>
   <path d="M20 45 L35 15 L50 45 Z" fill="url(#gradLight)"></path>
-  <text x="65" y="38" font-family="Poppins, sans-serif" font-weight="700" font-size="26" fill="url(#gradLight)">Polymath</text>
+  <text x="65" y="38" font-family="Poppins, sans-serif" font-weight="700" font-size="26" fill="url(#gradLight)">Prisme</text>
   <text x="150" y="38" font-family="Poppins, sans-serif" font-weight="400" font-size="12" fill="#444">media</text>
 </svg>
