@@ -33,7 +33,11 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 # Set DJANGO_DEBUG=True for development, omit or set to False for production
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False').lower() in ('true', '1', 'yes')
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',') if os.environ.get('ALLOWED_HOSTS') else []
+ALLOWED_HOSTS = ['prisme-yh16.onrender.com', '127.0.0.1', 'localhost']
+if os.environ.get('ALLOWED_HOSTS'):
+    ALLOWED_HOSTS.extend(os.environ.get('ALLOWED_HOSTS').split(','))
+
+CSRF_TRUSTED_ORIGINS = ['https://prisme-yh16.onrender.com']
 
 
 # Application definition
@@ -304,6 +308,6 @@ STORAGES = {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        "BACKEND": "whitenoise.storage.StaticFilesStorage", # Modifié temporairement pour éviter l'erreur 500 liée aux fichiers manquants
     },
 }
