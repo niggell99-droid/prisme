@@ -21,6 +21,8 @@ __pycache__/
 # ------------------
 # Ignore la base de données SQLite (elle doit être recréée sur le serveur)
 db.sqlite3
+# Export JSON de la base de données (contient des données sensibles)
+db_export.json
 
 # ------------------
 # FICHIERS DIVERS ET LOGS

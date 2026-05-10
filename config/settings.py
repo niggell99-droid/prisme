@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -33,7 +34,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 # Set DJANGO_DEBUG=True for development, omit or set to False for production
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False').lower() in ('true', '1', 'yes')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',') if os.environ.get('ALLOWED_HOSTS') else []
 
 
 # Application definition
@@ -106,21 +107,23 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-import dj_database_url
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 # Override with DATABASE_URL if present (e.g., in production)
 if os.environ.get('DATABASE_URL'):
-    DATABASES['default'] = dj_database_url.config(
-        conn_max_age=600,
-        conn_health_checks=True,
-    )
+    DATABASES = {
+        'default': dj_database_url.config(
+            conn_max_age=600,
+            conn_health_checks=True,
+            ssl_require=True
+        )
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
@@ -254,8 +257,14 @@ SESSION_COOKIE_HTTPONLY = True # Sécurité contre XSS
 SESSION_COOKIE_SAMESITE = 'Lax'
 
 if not DEBUG:
-    SESSION_COOKIE_SECURE = True # Uniquement HTTPS en prod
-    CSRF_COOKIE_SECURE = True
+    # --- SÉCURITÉ PRODUCTION ---
+    SESSION_COOKIE_SECURE = True        # Cookie de session uniquement via HTTPS
+    CSRF_COOKIE_SECURE = True           # Cookie CSRF uniquement via HTTPS
+    SECURE_SSL_REDIRECT = True          # Redirige HTTP → HTTPS
+    SECURE_HSTS_SECONDS = 31536000      # HSTS activé pour 1 an
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # --- PARAMÈTRES ALLAUTH ---
 
