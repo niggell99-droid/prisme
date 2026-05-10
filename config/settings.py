@@ -33,7 +33,8 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 # Set DJANGO_DEBUG=True for development, omit or set to False for production
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False').lower() in ('true', '1', 'yes')
 
-ALLOWED_HOSTS = ['prisme-yh16.onrender.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
+
 if os.environ.get('ALLOWED_HOSTS'):
     ALLOWED_HOSTS.extend(os.environ.get('ALLOWED_HOSTS').split(','))
 
@@ -163,7 +164,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
