@@ -2446,19 +2446,31 @@ body.dark-mode .category-card-item a:hover {
 }
 
 .footer-logo {
-	width: 120px;
-	margin-bottom: .5rem;
+	width: 140px;
+	margin: 0 auto .75rem;
+	display: block;
+}
+
+.footer-about {
+	text-align: center;
 }
 
 .footer-grid .socials {
 	display: flex;
-	gap: 1rem;
+	gap: 2rem;
+	justify-content: center;
+	margin-top: 1.5rem;
 }
 
-.footer-grid .socials img {
-	width: 30px;
-	border-radius: 3px;
-	margin-right: 10px;
+.footer-grid .socials img,
+.footer-grid .socials svg {
+	width: 28px;
+	height: auto;
+	transition: transform 0.2s ease;
+}
+
+.footer-grid .socials a:hover {
+	transform: translateY(-3px);
 }
 
 .footer-grid h4 {
@@ -2965,26 +2977,23 @@ body.dark-mode .scroll-progress {
 
 	.footer-about {
 		grid-area: auto;
-		text-align: left;
-		margin: 0;
+		text-align: center;
+		margin: 0 auto;
 		padding: 1rem 0;
 	}
 
 	.footer-logo {
-		margin-left: 0;
-		margin-right: 0;
-		margin-bottom: 1rem;
+		margin: 0 auto 1rem;
 	}
 
 	.footer-bottom-logo p {
 		margin-top: 0.5rem;
-		text-align: left;
+		text-align: center;
 	}
 
 	.socials {
-		margin-left: 0;
-		margin-right: 0;
-		margin-bottom: 1rem;
+		justify-content: center;
+		margin: 0 auto 1rem;
 	}
 
 	.footer-nav {
