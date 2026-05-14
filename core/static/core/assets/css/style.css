@@ -3458,6 +3458,10 @@ body.dark-mode .scroll-progress {
 		align-items: center;
 		justify-items: center;
 	}
+
+	.footer-grid .socials {
+		gap: 2.2rem;
+	}
 }
 
 @media (max-width: 484px) {
