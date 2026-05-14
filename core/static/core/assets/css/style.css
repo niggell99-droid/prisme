@@ -2440,7 +2440,7 @@ body.dark-mode .category-card-item a:hover {
 	max-width: var(--max-width);
 	margin: 0 auto;
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-columns: 1.5fr auto auto 1.5fr;
 	gap: 1rem;
 	align-items: start;
 }
