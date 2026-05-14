@@ -208,6 +208,33 @@
       });
     }
 
+    // Bouton Partager (navbar du bas)
+    const shareBtn = $("#share-button");
+    if (shareBtn) {
+      shareBtn.addEventListener("click", async () => {
+        if (navigator.share) {
+          try {
+            await navigator.share({
+              title: document.title,
+              text: "Découvrez cet article sur Prisme !",
+              url: window.location.href,
+            });
+          } catch (err) {
+            // L'utilisateur a annulé ou erreur silencieuse
+          }
+        } else {
+          // Fallback: copier l'URL
+          try {
+            await navigator.clipboard.writeText(window.location.href);
+            // On pourrait utiliser un toast plus élégant si dispo
+            alert("Lien copié dans le presse-papier !");
+          } catch (err) {
+            console.error("Échec de la copie:", err);
+          }
+        }
+      });
+    }
+
     // Fermetures
     if (closeMobileMenuBtn)
       closeMobileMenuBtn.addEventListener("click", closeMobileMenu);
