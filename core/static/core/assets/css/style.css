@@ -301,7 +301,7 @@ main#main {
 .nav {
 	display: flex;
 	max-width: var(--max-width);
-	margin: 0 auto;
+	margin: 0;
 	/* Centered */
 	width: 100%;
 	padding: 0 1rem;
@@ -841,7 +841,7 @@ a {
 .nav {
 	display: flex;
 	max-width: var(--max-width);
-	margin: 0 1rem;
+	margin: 0 auto;
 	align-items: center;
 	gap: var(--gap);
 	padding: 0.6rem;
@@ -855,6 +855,7 @@ a {
 	align-items: center;
 	gap: 0.5rem;
 	color: #fff;
+	margin-left: -1rem;
 }
 
 .logo-img {
@@ -993,7 +994,7 @@ a {
 .nav-right {
 	display: flex;
 	align-items: center;
-	gap: 0.8rem;
+	gap: 2rem;
 }
 
 .search {
