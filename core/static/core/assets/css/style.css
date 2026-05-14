@@ -527,6 +527,10 @@ main#main {
 }
 
 .mobile-nav-item {
+	background: transparent;
+	border: none;
+	padding: 0;
+	cursor: pointer;
 	color: var(--error);
 	text-align: center;
 	font-size: 0.75rem;
