@@ -46,13 +46,13 @@
     </section>
     {% else %}
     {# Fallback Hero #}
-    <section class="hero-fallback" aria-labelledby="hero-title">
+    {% comment %} <section class="hero-fallback" aria-labelledby="hero-title">
         <div class="hero-inner text-center">
             <h1 id="hero-title">Explorez le futur de la technologie</h1>
             <p class="subtitle">Tutoriels, projets, articles et analyses — pour ingénieurs & makers.</p>
             <a class="cta" href="{% url 'blog:article_list' %}">Découvrir les articles</a>
         </div>
-    </section>
+    </section> {% endcomment %}
     {% endif %}
 
 

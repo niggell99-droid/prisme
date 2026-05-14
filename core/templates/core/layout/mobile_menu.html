@@ -1,0 +1,78 @@
+{% load static %}
+<aside class="mobile-menu" aria-hidden="true">
+        <div class="mobile-menu-inner">
+            <button type="button" class="close-mobile-menu" aria-label="Fermer le menu">
+                <img src="{% static 'core/assets/icons/close.svg' %}" alt="Fermer">
+            </button>
+            <div class="mobile-menu-header">
+                <img src="{% static 'core/assets/img/logo/prisme_logo_light.svg' %}" alt="Prisme"
+                    class="mobile-menu-logo">
+            </div>
+
+            <nav class="mobile-menu-nav">
+                <ul>
+                    <li><a href="{% url 'home' %}">Accueil</a></li>
+                    <li><a href="{% url 'forum:topic_list' %}?tab=actu" style="color: var(--accent);">Actualités</a>
+                    </li>
+                    <li><a href="{% url 'forum:topic_list' %}?tab=live" style="color: #ef4444;">Live Stream</a></li>
+                    <li><a href="{% url 'blog:article_list' %}">Articles</a></li>
+                    <li><a href="{% url 'projets:projet_list' %}">Projets</a></li>
+                    <li><a href="{% url 'forum:topic_list' %}">Forum</a></li>
+                    <li class="divider"></li>
+
+                    {% if all_categories %}
+                    <li class="mobile-only menu-separator">
+                        <h4
+                            style="font-size: 0.9rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.05em; margin: 1rem 0 0.5rem 0;">
+                            Catégories</h4>
+                    </li>
+                    {% for category in all_categories %}
+                    <li class="mobile-only">
+                        <a href="{% url 'blog:category_articles' slug=category.slug %}"
+                            style="display: flex; justify-content: space-between; align-items: center;">
+                            {{ category.name }}
+                            <span style="opacity: 0.3;">→</span>
+                        </a>
+                    </li>
+                    {% endfor %}
+                    <li class="divider mobile-only"></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </aside>
+
+    <div class="mobile-menu-overlay"></div>
+
+    <nav class="mobile-bottom-nav">
+        <a href="{% url 'home' %}" class="mobile-nav-item" aria-label="Accueil">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span>Accueil</span>
+        </a>
+        <a href="{% url 'forum:topic_list' %}?tab=actu" class="mobile-nav-item" aria-label="Actualité">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"></path>
+                <path d="M18 14h-8"></path>
+                <path d="M15 18h-5"></path>
+                <path d="M10 6h8v4h-8V6Z"></path>
+            </svg>
+            <span>Actualité</span>
+        </a>
+        <a href="{% url 'forum:topic_list' %}" class="mobile-nav-item" aria-label="Commentaires">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span>Forum</span>
+        </a>
+        <button type="button" id="share-button" class="mobile-nav-item" aria-label="Partager">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                <polyline points="16 6 12 2 8 6"></polyline>
+                <line x1="12" y1="2" x2="12" y2="15"></line>
+            </svg>
+            <span>Partager</span>
+        </button>
+    </nav>

@@ -1,0 +1,204 @@
+/*======================================================================
+  5. LAYOUT & NAVIGATION
+======================================================================*/
+/* 5.1 Site Header */
+.site-header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: var(--header-height);
+	z-index: 1000;
+	background: linear-gradient(90deg, var(--nav), #0b2430);
+	box-shadow: 0 2px 8px rgba(3, 10, 18, 0.2);
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 60px 45px;
+	grid-template-areas:
+		"prime-nav"
+		"secondary";
+}
+
+/* Primary Nav */
+.nav {
+	display: flex;
+	max-width: var(--max-width);
+	margin: 0;
+	/* Centered */
+	width: 100%;
+	padding: 0 1rem;
+	align-items: center;
+	justify-content: space-between;
+	grid-area: prime-nav;
+}
+
+/* Logo */
+.logo {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	color: #fff;
+	font-weight: 700;
+	font-size: 1.1rem;
+}
+
+.logo-img {
+	width: 40px;
+	height: 40px;
+	border-radius: 8px;
+}
+
+/* Logo Text - Styled Brand Name */
+.logo-text {
+	font-family: 'Inter', 'Poppins', sans-serif;
+	font-weight: 800;
+	font-size: 1.3rem;
+	letter-spacing: -0.02em;
+	background: linear-gradient(135deg, #00a8ff 0%, #6b21a8 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	transition: all 0.3s ease;
+}
+
+.logo:hover .logo-text {
+	background: linear-gradient(135deg, #64b5f6 0%, #9333ea 100%);
+	-webkit-background-clip: text;
+	background-clip: text;
+	transform: scale(1.02);
+}
+
+/* Prevent translation by browsers */
+.notranslate {
+	translate: no;
+}
+
+/* Nav Links (Desktop) */
+.navlinks {
+	display: flex;
+}
+
+.navlinks ul {
+	display: flex;
+	gap: 1.5rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.navlinks a {
+	position: relative;
+	color: rgba(255, 255, 255, 0.9);
+	font-weight: 500;
+	padding: 8px 0;
+}
+
+.navlinks a::after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 2px;
+	bottom: 0;
+	left: 0;
+	background: var(--accent);
+	transform: scaleX(0);
+	transform-origin: right;
+	transition: transform 0.3s ease;
+}
+
+.navlinks a:hover::after {
+	transform: scaleX(1);
+	transform-origin: left;
+}
+
+/* Nav Right Actions */
+.nav-right {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.search {
+	display: flex;
+	align-items: center;
+	background: rgba(255, 255, 255, 0.1);
+	padding: 4px 12px;
+	border-radius: 20px;
+}
+
+.search-input {
+	border: none;
+	background: transparent;
+	color: #fff;
+	padding: 4px;
+	width: 180px;
+	font-size: 0.9rem;
+}
+
+.search-input::placeholder {
+	color: rgba(255, 255, 255, 0.6);
+}
+
+.search-input:focus {
+	box-shadow: none;
+}
+
+/* Profile / Login */
+.profile-picture-container {
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	overflow: hidden;
+	border: 2px solid var(--accent);
+	transition: border-color 0.2s;
+}
+
+.profile-picture-container:hover {
+	border-color: #fff;
+}
+
+.profile-picture {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* Hamburger (Mobile) */
+.hamburger {
+	display: none;
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	padding: 0.5rem;
+}
+
+/* See JS/Mobile implementation below */
+
+
+/* 5.3 Secondary Nav (Categories) */
+.secondary-nav {
+	grid-area: secondary;
+	background: var(--card);
+	border-bottom: 1px solid var(--border-color);
+	height: 45px;
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.secondary-nav .container {
+	width: 100%;
+	max-width: var(--max-width);
+	margin: 0 auto;
+	padding: 0 1rem;
+	overflow-x: auto;
+	white-space: nowrap;
+	scrollbar-width: none;
+	/* Hide scrollbar Firefox */
+	display: flex;
+	align-items: center;
+}
+
+.secondary-nav .container::-webkit-scrollbar {
+	display: none;
+}
