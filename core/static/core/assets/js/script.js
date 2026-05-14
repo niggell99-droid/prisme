@@ -136,7 +136,7 @@
     // ===== Navigation (Desktop + Mobile) =====
     const mobileMenu = $(".mobile-menu");
     const mobileMenuOverlay = $(".mobile-menu-overlay");
-    const hamburgerMini = $(".hamburger-mini");
+    //const hamburgerMini = $(".hamburger-mini");
     const closeMobileMenuBtn = $(".close-mobile-menu");
     const navOverlay = $(".nav-overlay");
 
@@ -202,12 +202,12 @@
 
     // Hamburger mini (navbar du bas)
     //const hamburgerMini = $(".hamburger-mini");
-    if (hamburgerMini) {
+    /*if (hamburgerMini) {
       hamburgerMini.addEventListener("click", () => {
         if (window.innerWidth <= MOBILE_BREAKPOINT) openMobileMenu();
         else toggleDesktopNav();
       });
-    }
+    }*/
 
     // Bouton Partager (navbar du bas)
     const shareBtn = $("#share-button");

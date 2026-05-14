@@ -1999,7 +1999,7 @@ main#main {
 /* BADGE DE CATÉGORIE */
 .category-badge {
 	display: inline-block;
-	background-color: var(--muted);
+	background-color: var(--accent);
 	color: white;
 	padding: 0.2rem 0.6rem;
 	border-radius: 4px;
@@ -2170,22 +2170,26 @@ main#main {
 }
 
 .category-card-item a h3 {
-	font-family: 'Outfit', var(--font-heading), sans-serif;
-	font-size: 1.25rem;
+	display: inline-block;
+	background-color: var(--accent);
+	color: white;
+	padding: 0.2rem 0.6rem;
+	border-radius: 4px;
+	font-size: 0.75rem;
 	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	width: fit-content;
+	/* font-family: 'Outfit', var(--font-heading), sans-serif; */
+	/* font-size: 1.25rem; */
 	margin: 0;
 	line-height: 1.3;
-	color: var(--text);
 	transition: color 0.3s ease;
 	/* Fix pour éviter les titres tronqués */
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	hyphens: auto;
 	-webkit-hyphens: auto;
-}
-
-.category-card-item a:hover h3 {
-	color: var(--accent);
 }
 
 .category-card-item a p {
@@ -2277,9 +2281,10 @@ body.dark-mode .category-card-item a:hover {
 }
 
 .project-card-item h4 {
-	margin-top: 0;
-	margin-bottom: 0.2rem;
+	margin-top: -1.5rem;
+	margin-bottom: 1.5rem;
 	transition: color 0.3s ease;
+	
 }
 
 .project-card-item a:hover h4 {
