@@ -201,6 +201,7 @@
     }
 
     // Hamburger mini (navbar du bas)
+    //const hamburgerMini = $(".hamburger-mini");
     if (hamburgerMini) {
       hamburgerMini.addEventListener("click", () => {
         if (window.innerWidth <= MOBILE_BREAKPOINT) openMobileMenu();
