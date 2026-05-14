@@ -2441,9 +2441,8 @@ body.dark-mode .category-card-item a:hover {
 	margin: 0 auto;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
-	gap: 2rem;
+	gap: 1rem;
 	align-items: start;
-	text-align: center;
 }
 
 .footer-logo {
@@ -2475,14 +2474,10 @@ body.dark-mode .category-card-item a:hover {
 }
 
 .footer-grid h4 {
-	margin: 0 auto 1.25rem;
+	margin: 0 0 .5rem;
 	color: #fff;
-	border-bottom: 2px solid var(--accent);
-	padding-bottom: 5px;
-	display: inline-block;
-	font-size: 1.1rem;
-	text-transform: uppercase;
-	letter-spacing: 0.05em;
+	border-left: 3px solid var(--color-accent);
+	padding-left: 10px;
 }
 
 .footer-grid ul {
@@ -2503,20 +2498,12 @@ body.dark-mode .category-card-item a:hover {
 	color: var(--color-accent);
 }
 
-.newsletter-form {
-	max-width: 280px;
-	margin: 0 auto;
-}
-
 .newsletter-form input {
 	width: 100%;
-	padding: .7rem 1rem;
+	padding: .6rem;
 	border-radius: 8px;
-	border: 1px solid rgba(255, 255, 255, 0.1);
-	background: rgba(255, 255, 255, 0.05);
-	color: #fff;
-	margin-bottom: .75rem;
-	text-align: center;
+	border: 1px solid rgba(255, 255, 255, 0.06);
+	margin-bottom: .5rem;
 }
 
 .footer-bottom {
@@ -2983,10 +2970,8 @@ body.dark-mode .scroll-progress {
 	}
 
 	.footer-grid h4 {
-		border-left: none;
-		border-bottom: 2px solid var(--accent);
-		margin: 0 auto 1.25rem;
-		display: inline-block;
+		border-left: 3px solid var(--color-accent);
+		border-bottom: none;
 		font-size: 1rem;
 	}
 
