@@ -3199,14 +3199,6 @@ body.dark-mode .scroll-progress {
 	}
 }
 
-@media (max-width: 554px) {
-	.newsletter-form {
-		display: grid;
-		align-items: center;
-		justify-items: center;
-	}
-}
-
 /* --- TABLETTES (768px et moins) --- */
 @media (max-width: 768px) {
 	.hero-featured {
@@ -3450,9 +3442,21 @@ body.dark-mode .scroll-progress {
 	}
 }
 
+@media (max-width: 554px) {
+	.newsletter-form {
+		display: grid;
+		align-items: center;
+		justify-items: center;
+	}
+}
+
 @media (max-width: 484px) {
 	.logo-img {
 		display: none;
+	}
+
+	.hamburger{
+		margin-left: -0.5rem;
 	}
 
 	.hero-featured {
