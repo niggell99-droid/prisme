@@ -1869,6 +1869,9 @@ body.dark-mode .category-card-item a:hover {
 .project-card-item a:hover p {
 	color: var(--text);
 }
+.view-all-link {
+	margin-top: 1rem;
+}
 
 /* ------------------------------------------------------------------ */
 /* 6.5 Newsletter                                                      */
