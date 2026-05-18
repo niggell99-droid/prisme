@@ -41,8 +41,18 @@ body{
   animation:cardIn 420ms cubic-bezier(.2,.9,.3,1) forwards;
 }
 @keyframes cardIn{from{opacity:0; transform:translateY(18px)} to{opacity:1; transform:translateY(0)}}
-.auth-logo img{width:56px;height:56px}
-.auth-logo{display:inline-block;margin-bottom:0.6rem}
+
+.auth-logo{
+  width:56px;
+  height:56px;
+  display:inline-block;
+  margin-bottom:0.6rem;
+  border-radius: 50%;
+}
+/* .auth-logo{
+  display:inline-block;
+  margin-bottom:0.6rem;
+} */
 h1{margin:0;font-size:1.25rem}
 .auth-subtitle{color:var(--muted);margin:0.6rem 0 1.4rem;font-size:0.95rem}
 .auth-form{display:block;text-align:left}

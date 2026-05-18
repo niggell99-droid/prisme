@@ -6,7 +6,31 @@
 <link rel='stylesheet' href='{% static ' core/assets/css/project.css' %}?v=4'>
 <link rel='stylesheet' href='{% static ' core/assets/css/article.css' %}?v=6'>
 <style>
-  /* ===== ARTICLE DETAIL PAGE - PREMIUM STYLE ===== */
+  /* ===== ARTICLE DETAIL PAGE - PREMIUM ADAPTIVE ===== */
+
+  /* ── Local variables (adaptive) ── */
+  :root {
+    --ad-heading:      #0f172a;
+    --ad-body:         #374151;
+    --ad-surface:      var(--card);
+    --ad-border:       var(--border-color);
+    --ad-muted:        var(--muted);
+    --ad-author-bg:    #f8fafc;
+    --ad-meta-sep:     rgba(0,0,0,0.06);
+    --ad-code-bg:      rgba(0,0,0,0.06);
+    --ad-placeholder:  linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  }
+  body.dark-mode {
+    --ad-heading:      #f1f5f9;
+    --ad-body:         #cbd5e1;
+    --ad-surface:      rgba(30,41,59,0.6);
+    --ad-border:       rgba(255,255,255,0.09);
+    --ad-muted:        #94a3b8;
+    --ad-author-bg:    rgba(30,41,59,0.7);
+    --ad-meta-sep:     rgba(255,255,255,0.07);
+    --ad-code-bg:      rgba(255,255,255,0.08);
+    --ad-placeholder:  linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #334155 100%);
+  }
 
   /* Hero Section */
   .article-detail-hero {
@@ -71,7 +95,7 @@
     font-weight: 800;
     line-height: 1.15;
     letter-spacing: -0.03em;
-    color: var(--text, #0f172a);
+    color: var(--ad-heading);
     margin-bottom: 2rem;
     animation: fadeInUp 0.6s ease 0.1s both;
   }
@@ -110,14 +134,14 @@
   .article-author-name {
     font-family: var(--font-heading, 'Outfit', sans-serif);
     font-weight: 600;
-    color: var(--text, #0f172a);
+    color: var(--ad-heading);
     font-size: 0.95rem;
   }
 
   .article-meta-separator {
     width: 4px;
     height: 4px;
-    background: var(--muted, #94a3b8);
+    background: var(--ad-muted);
     border-radius: 50%;
   }
 
@@ -125,7 +149,7 @@
   .article-meta-read-time {
     font-family: var(--font-heading, 'Outfit', sans-serif);
     font-size: 0.9rem;
-    color: var(--muted, #64748b);
+    color: var(--ad-muted);
     display: flex;
     align-items: center;
     gap: 0.4rem;
@@ -169,7 +193,7 @@
   .article-featured-placeholder {
     width: 100%;
     height: 400px;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    background: var(--ad-placeholder);
     border-radius: 20px;
     display: flex;
     align-items: center;
@@ -212,7 +236,7 @@
     font-family: var(--font-serif, 'Merriweather', serif);
     font-size: 1.125rem;
     line-height: 1.9;
-    color: var(--text, #334155);
+    color: var(--ad-body);
     max-width: 750px;
   }
 
@@ -224,7 +248,7 @@
     font-family: var(--font-heading, 'Outfit', sans-serif);
     font-size: 1.75rem;
     font-weight: 700;
-    color: var(--text, #0f172a);
+    color: var(--ad-heading);
     margin: 3rem 0 1.25rem 0;
     position: relative;
     padding-left: 1rem;
@@ -245,7 +269,7 @@
     font-family: var(--font-heading, 'Outfit', sans-serif);
     font-size: 1.35rem;
     font-weight: 600;
-    color: var(--text, #0f172a);
+    color: var(--ad-heading);
     margin: 2.5rem 0 1rem 0;
   }
 
@@ -264,11 +288,11 @@
   .article-detail-body blockquote {
     margin: 2.5rem 0;
     padding: 1.5rem 2rem;
-    background: linear-gradient(135deg, rgba(30, 136, 229, 0.05), rgba(30, 136, 229, 0.02));
+    background: rgba(30, 136, 229, 0.05);
     border-left: 4px solid var(--accent, #1e88e5);
     border-radius: 0 12px 12px 0;
     font-style: italic;
-    color: var(--muted, #64748b);
+    color: var(--ad-muted);
   }
 
   .article-detail-body img {
@@ -290,13 +314,14 @@
   }
 
   .article-detail-body code {
-    background: rgba(0, 0, 0, 0.05);
+    background: var(--ad-code-bg);
     padding: 0.2rem 0.5rem;
     border-radius: 4px;
     font-size: 0.9em;
     font-family: 'Fira Code', 'Monaco', monospace;
   }
 
+  /* Code blocks always use dark background for readability */
   .article-detail-body pre {
     background: #1e293b;
     color: #e2e8f0;
@@ -317,8 +342,8 @@
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    background: linear-gradient(135deg, var(--card, #f8fafc), rgba(30, 136, 229, 0.03));
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    background: var(--ad-author-bg);
+    border: 1px solid var(--ad-border);
     border-radius: 16px;
     padding: 2rem;
     margin-top: 4rem;
@@ -326,7 +351,7 @@
   }
 
   .article-author-card-pro:hover {
-    border-color: rgba(30, 136, 229, 0.2);
+    border-color: rgba(30, 136, 229, 0.25);
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
     transform: translateY(-2px);
   }
@@ -336,7 +361,7 @@
     height: 80px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid rgba(30, 136, 229, 0.2);
+    border: 3px solid rgba(30, 136, 229, 0.22);
     flex-shrink: 0;
   }
 
@@ -345,12 +370,12 @@
     font-size: 1.15rem;
     font-weight: 700;
     margin: 0 0 0.3rem 0;
-    color: var(--text, #0f172a);
+    color: var(--ad-heading);
   }
 
   .article-author-card-pro .author-info p {
     font-size: 0.9rem;
-    color: var(--muted, #64748b);
+    color: var(--ad-muted);
     margin: 0 0 1rem 0;
   }
 
@@ -382,27 +407,27 @@
   }
 
   .sidebar-card-pro {
-    background: var(--card, #fff);
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    background: var(--ad-surface);
+    border: 1px solid var(--ad-border);
     border-radius: 16px;
     padding: 1.75rem;
     margin-bottom: 1.5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
     transition: all 0.3s ease;
   }
 
   .sidebar-card-pro:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.09);
+    border-color: rgba(30, 136, 229, 0.2);
   }
 
   .sidebar-card-pro h3 {
     font-family: var(--font-heading, 'Outfit', sans-serif);
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: var(--muted, #64748b);
+    color: var(--ad-muted);
     margin: 0 0 1.25rem 0;
     padding-bottom: 0.75rem;
     border-bottom: 2px solid var(--accent, #1e88e5);
@@ -420,7 +445,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.9rem 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid var(--ad-meta-sep);
     font-size: 0.9rem;
   }
 
@@ -429,13 +454,13 @@
   }
 
   .sidebar-meta-list .meta-label {
-    color: var(--muted, #64748b);
+    color: var(--ad-muted);
     font-weight: 500;
   }
 
   .sidebar-meta-list .meta-value {
     font-weight: 700;
-    color: var(--text, #0f172a);
+    color: var(--ad-heading);
   }
 
   /* Share Buttons */
@@ -489,7 +514,7 @@
   }
 
   .sidebar-tag {
-    background: rgba(30, 136, 229, 0.08);
+    background: rgba(30, 136, 229, 0.09);
     color: var(--accent, #1e88e5);
     padding: 0.4rem 0.9rem;
     border-radius: 999px;
@@ -497,11 +522,13 @@
     font-weight: 600;
     transition: all 0.2s ease;
     text-decoration: none;
+    border: 1px solid rgba(30, 136, 229, 0.18);
   }
 
   .sidebar-tag:hover {
     background: var(--accent);
     color: #fff;
+    border-color: var(--accent);
     transform: translateY(-1px);
   }
 
@@ -584,43 +611,7 @@
     }
   }
 
-  /* Dark Mode */
-  body.dark-mode .article-detail-title,
-  body.dark-mode .article-detail-body h2,
-  body.dark-mode .article-detail-body h3 {
-    color: #e0e0e0;
-  }
-
-  body.dark-mode .article-detail-body {
-    color: #b0b0b0;
-  }
-
-  body.dark-mode .article-author-card-pro {
-    background: rgba(30, 41, 59, 0.5);
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-
-  body.dark-mode .sidebar-card-pro {
-    background: rgba(30, 41, 59, 0.5);
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-
-  body.dark-mode .sidebar-meta-list li {
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-
-  body.dark-mode .sidebar-meta-list .meta-value {
-    color: #e0e0e0;
-  }
-
-  body.dark-mode .article-detail-body code {
-    background: rgba(255, 255, 255, 0.1);
-  }
-
-  body.dark-mode .article-category-badge {
-    background: rgba(30, 136, 229, 0.2);
-    border-color: rgba(30, 136, 229, 0.4);
-  }
+  /* Dark mode overrides handled via CSS variables above */
 </style>
 
 <!-- Hero Section -->

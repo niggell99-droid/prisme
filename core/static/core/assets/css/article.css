@@ -1,126 +1,65 @@
 /* =========================================
-   ARTICLE DETAIL STYLES (SPLIT LAYOUT)
+   ARTICLE DETAIL STYLES
+   Version 3.0 - Full Light/Dark Adaptive
    ========================================= */
 
-/* Dark mode adjustments */
-/* Dark mode adjustments (Media Query) */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg: #121212;
-        --card: #1e1e1e;
-        --text: #e0e0e0;
-        --muted: #b0b0b0;
-        --accent: #90caf9;
-    }
-
-    .article-body {
-        color: var(--text);
-    }
-
-    .article-body a {
-        color: var(--accent);
-    }
-
-    .article-body blockquote {
-        color: var(--muted);
-        border-left-color: var(--accent);
-    }
-
-    .hero-meta-top .share-btn {
-        color: var(--muted);
-        border-color: var(--muted);
-    }
-
-    .hero-meta-top .share-btn:hover {
-        color: var(--accent);
-        border-color: var(--accent);
-    }
-}
-
-/* Dark mode adjustments (Manual Toggle Class) */
-body.dark-mode {
-    --bg: #121212;
-    --card: #1e1e1e;
-    --text: #e0e0e0;
-    --muted: #b0b0b0;
-    --accent: #90caf9;
-}
-
-body.dark-mode .article-body {
-    color: var(--text);
-}
-
-body.dark-mode .article-body a {
-    color: var(--accent);
-}
-
-body.dark-mode .article-body blockquote {
-    color: var(--muted);
-    border-left-color: var(--accent);
-}
-
-body.dark-mode .hero-meta-top .share-btn {
-    color: var(--muted);
-    border-color: var(--muted);
-}
-
-body.dark-mode .hero-meta-top .share-btn:hover {
-    color: var(--accent);
-    border-color: var(--accent);
-}
-
-body.dark-mode .article-hero-split h1 {
-    color: #e0e0e0;
-}
-
-body.dark-mode .article-body h2,
-body.dark-mode .article-body h3 {
-    color: #e0e0e0;
-}
-
-body.dark-mode .article-hero-split .author-name {
-    color: #e0e0e0;
-}
-
-/* --- 1. FONTS & TYPOGRAPHY --- */
+/* ─── Fonts ──────────────────────────────── */
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Outfit:wght@400;600;800&display=swap');
 
 :root {
-    --font-serif: 'Merriweather', serif;
-    --font-heading: 'Outfit', sans-serif;
+    --font-serif:   'Merriweather', Georgia, serif;
+    --font-heading: 'Outfit', 'Inter', sans-serif;
+
+    /* Article-specific surfaces */
+    --art-surface:        var(--card);
+    --art-border:         var(--border-color);
+    --art-body-color:     #374151;       /* Slate-700 - lisible sur fond clair */
+    --art-heading-color:  #0f172a;       /* Slate-900 */
+    --art-blockquote-bg:  rgba(30, 136, 229, 0.05);
+    --art-code-bg:        rgba(0, 0, 0, 0.06);
+    --art-separator:      rgba(0, 0, 0, 0.06);
+    --art-author-bg:      #f8fafc;
+    --art-meta-border:    rgba(0, 0, 0, 0.07);
 }
 
-/* --- 2. LAYOUT CONTAINER --- */
+body.dark-mode {
+    --art-surface:        rgba(30, 41, 59, 0.6);
+    --art-border:         rgba(255, 255, 255, 0.09);
+    --art-body-color:     #cbd5e1;
+    --art-heading-color:  #f1f5f9;
+    --art-blockquote-bg:  rgba(30, 136, 229, 0.1);
+    --art-code-bg:        rgba(255, 255, 255, 0.08);
+    --art-separator:      rgba(255, 255, 255, 0.08);
+    --art-author-bg:      rgba(30, 41, 59, 0.6);
+    --art-meta-border:    rgba(255, 255, 255, 0.07);
+}
+
+/* ─── 1. Layout Container ────────────────── */
 .article-shell {
     width: 100%;
     max-width: 1000px;
-    /* Plus large pour le layout split */
     margin: 0 auto;
     padding: 0 1.5rem;
 }
 
-/* --- 3. HERO SECTION (SPLIT) --- */
+/* ─── 2. Hero Section ────────────────────── */
 .article-hero-split {
-    margin-top: 4rem;
-    /* Espace depuis le header */
-    margin-bottom: 4rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     text-align: center;
 }
 
-/* Contenu Header (Titre, Meta) */
 .hero-header-content {
     max-width: 800px;
     margin: 0 auto 3rem auto;
 }
 
-/* Kicker / Categorie */
 /* Category Pill */
 .category-pill {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: rgba(30, 136, 229, 0.1);
-    /* Petit fond léger teinté accent */
+    background: rgba(30, 136, 229, 0.09);
     color: var(--accent);
     padding: 0.4rem 1rem;
     border-radius: 99px;
@@ -129,8 +68,8 @@ body.dark-mode .article-hero-split .author-name {
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    border: 1px solid rgba(30, 136, 229, 0.2);
-    transition: all 0.2s ease;
+    border: 1px solid rgba(30, 136, 229, 0.22);
+    transition: all 0.25s ease;
 }
 
 .category-pill svg {
@@ -143,47 +82,46 @@ body.dark-mode .article-hero-split .author-name {
     background: var(--accent);
     color: #fff;
     border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(30, 136, 229, 0.25);
 }
 
-/* Titre Article */
 /* Titre Article */
 .article-hero-split h1 {
     font-family: var(--font-heading);
-    font-size: clamp(2.8rem, 6vw, 4rem);
-    /* Plus massif et impactant */
-    line-height: 1.1;
-    letter-spacing: -0.02em;
+    font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+    line-height: 1.12;
+    letter-spacing: -0.025em;
     font-weight: 800;
     margin-bottom: 2rem;
-    color: #0f172a;
-    /* Slate 900 */
+    color: var(--art-heading-color);
 }
 
-/* Meta Data Layout */
+/* Meta Layout */
 .hero-meta-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     margin-bottom: 0.2rem;
-    /* reduced spacing */
 }
 
 .share-btn {
     font-family: var(--font-heading);
-    font-size: 0.85rem;
+    font-size: 0.83rem;
     font-weight: 600;
     color: var(--muted);
     text-decoration: none;
-    border: 1px solid #e2e8f0;
-    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--art-border);
+    padding: 0.3rem 0.85rem;
     border-radius: 20px;
-    transition: all 0.2s;
+    transition: all 0.22s ease;
 }
 
 .share-btn:hover {
     border-color: var(--accent);
     color: var(--accent);
+    background: rgba(30, 136, 229, 0.06);
 }
 
 .article-hero-split .meta {
@@ -206,13 +144,14 @@ body.dark-mode .article-hero-split .author-name {
     height: 44px;
     border-radius: 50%;
     object-fit: cover;
+    border: 2px solid rgba(30, 136, 229, 0.3);
 }
 
 .article-hero-split .author-name {
     font-family: var(--font-heading);
     font-size: 0.95rem;
     font-weight: 600;
-    color: var(--text);
+    color: var(--art-heading-color);
 }
 
 .article-hero-split .muted {
@@ -228,11 +167,8 @@ body.dark-mode .article-hero-split .author-name {
     max-height: 600px;
     overflow: hidden;
     border-radius: 20px;
-    /* Arrondi plus prononcé */
-    box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.15);
-    /* Ombre 'Premium' plus diffuse */
+    box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.14);
     margin: 0.5rem 0;
-    /* reduced top and bottom margin */
     position: relative;
     z-index: 1;
 }
@@ -244,17 +180,15 @@ body.dark-mode .article-hero-split .author-name {
     display: block;
 }
 
-/* --- 4. ARTICLE BODY CONTENT --- */
+/* ─── 3. Article Body ─────────────────────── */
 .article-body {
     width: 100%;
     max-width: 700px;
-    /* Plus étroit pour lecture optimale */
-    margin: 0 auto 4rem auto;
+    margin: 0 auto 2rem auto;
     font-family: var(--font-serif);
-    font-size: 1.2rem;
-    line-height: 1.85;
-    color: #334155;
-    /* Slate 700 */
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: var(--art-body-color);
 }
 
 .article-body p {
@@ -264,42 +198,28 @@ body.dark-mode .article-hero-split .author-name {
 .article-body h2,
 .article-body h3 {
     font-family: var(--font-heading);
-    color: #0f172a;
+    color: var(--art-heading-color);
     margin-top: 3rem;
     margin-bottom: 1rem;
     line-height: 1.3;
     font-weight: 700;
 }
 
-.article-body h2 {
-    font-size: 1.8rem;
+.article-body h2 { font-size: 1.75rem; }
+.article-body h3 { font-size: 1.38rem; }
+
+.article-body a {
+    color: var(--accent);
 }
 
-.article-body h3 {
-    font-size: 1.4rem;
-}
-
-/* Citations */
 .article-body blockquote {
     margin: 2rem 0;
     padding-left: 2rem;
     border-left: 4px solid var(--accent);
     font-style: italic;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: var(--muted);
     position: relative;
-}
-
-.article-body blockquote::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.2rem;
-    width: 1rem;
-    height: 1rem;
-    background: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22currentColor%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M9 9h6M9 12h6M9 15h6%22/%3E%3C/svg%3E') no-repeat center;
-    background-size: contain;
-    margin-left: -2rem;
 }
 
 .article-body blockquote p {
@@ -309,38 +229,48 @@ body.dark-mode .article-hero-split .author-name {
 .article-body img {
     max-width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: 10px;
     margin: 2rem 0;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
 }
 
-/* --- 5. AUTHOR CARD (BOTTOM) --- */
+/* ─── 4. Author Card (Bottom) ─────────────── */
 .article-author-card {
     max-width: 700px;
-    margin: 4rem auto 6rem auto;
+    margin: 2rem auto 4rem auto;
     padding: 2rem;
-    background: #f8fafc;
-    border-radius: 12px;
+    background: var(--art-author-bg);
+    border: 1px solid var(--art-border);
+    border-radius: 14px;
     display: flex;
     align-items: center;
     gap: 1.5rem;
+    transition: box-shadow 0.25s ease;
+}
+
+.article-author-card:hover {
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
 }
 
 .article-author-card img {
-    width: 70px;
-    height: 70px;
+    width: 68px;
+    height: 68px;
     border-radius: 50%;
     object-fit: cover;
+    border: 2px solid rgba(30, 136, 229, 0.25);
+    flex-shrink: 0;
 }
 
 .article-author-card h3 {
     margin: 0 0 0.3rem 0;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-family: var(--font-heading);
+    color: var(--art-heading-color);
 }
 
 .article-author-card p {
-    margin: 0 0 0.8rem 0;
-    font-size: 0.95rem;
+    margin: 0 0 0.7rem 0;
+    font-size: 0.9rem;
     color: var(--muted);
     font-family: var(--font-heading);
 }
@@ -351,20 +281,26 @@ body.dark-mode .article-hero-split .author-name {
     font-weight: 600;
     font-size: 0.85rem;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-/* RESPONSIVE */
+/* ─── Responsive ──────────────────────────── */
 @media (max-width: 768px) {
     .article-hero-split h1 {
         font-size: 2rem;
     }
 
     .hero-image-container {
-        border-radius: 8px;
+        border-radius: 10px;
         max-height: 300px;
     }
 
     .article-shell {
         padding: 0 1rem;
+    }
+
+    .article-author-card {
+        flex-direction: column;
+        text-align: center;
     }
 }

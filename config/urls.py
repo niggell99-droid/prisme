@@ -26,7 +26,7 @@ urlpatterns = [
     path('core/', include('core.urls')),  # Garde aussi le préfixe core/ pour compatibilité
     path('blog/', include('blog.urls', namespace='blog')),
     path('projets/', include('projets.urls')),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('django_ckeditor_5/', include('django_ckeditor_5.urls')),
     path('profils/', include('utilisateurs.urls')),
     #path('accounts/', include('allauth.urls')),
     #path('accounts/', include('django.contrib.auth.urls')),
