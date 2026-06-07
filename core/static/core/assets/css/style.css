@@ -1754,6 +1754,7 @@ select:focus {
 	padding: 0.2rem 0.6rem;
 	border-radius: 4px;
 	font-size: 0.75rem;
+	font-family: 'Inter', "Helvetica Neue", Arial, sans-serif;
 	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: 0.5px;
@@ -2535,31 +2536,33 @@ body.dark-mode .site-footer {
 
 	.hero-featured {
 		display: block;
-		min-height: 750px;
-		height: 100vh;
+		min-height: auto;
+		height: auto;
 		margin-left: 0;
 		margin-right: 0;
 	}
 
 	.hero-featured a {
-		height: 60px;
+		height: auto;
 		width: 100%;
 	}
 
 	.hero-featured a img {
-		height: 65vh;
+		height: auto;
+		max-height: 50vh;
 		width: 100%;
-		z-index: 4000;
 	}
 
 	.hero-featured h1 {
 		font-size: 2rem;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
 	}
 
 	.hero-content {
-		max-width: 75%;
-		padding: 3.5rem 2.5rem;
-		min-height: 500px;
+		max-width: 100%;
+		padding: 2.5rem 2rem;
+		min-height: auto;
 	}
 
 	.hero-featured .subtitle {
@@ -2691,8 +2694,8 @@ body.dark-mode .site-footer {
 		top: 60px;
 		left: 0;
 		bottom: 0;
-		width: 300px;
-		max-width: 85vw;
+		width: 100%;
+		max-width: 100%;
 		background: linear-gradient(180deg, var(--nav), #06202a);
 		transform: translateX(-110%);
 		flex-direction: column;
@@ -2837,14 +2840,15 @@ body.dark-mode .site-footer {
 /* --- Tablettes (768px et moins) --- */
 @media (max-width: 768px) {
 	.hero-featured {
-		min-height: max-content;
+		min-height: auto;
+		height: auto;
 		border-radius: 8px;
 	}
 
 	.hero-content {
 		max-width: 100%;
-		padding: 3rem 2rem;
-		min-height: max-content;
+		padding: 2.5rem 1.5rem;
+		min-height: auto;
 	}
 
 	.hero h1 {
@@ -2852,9 +2856,11 @@ body.dark-mode .site-footer {
 	}
 
 	.hero-featured h1 {
-		font-size: 2rem;
-		line-height: 1.25;
+		font-size: 1.6rem;
+		line-height: 1.3;
 		margin-bottom: 1rem;
+		word-wrap: break-word;
+		overflow-wrap: break-word;
 	}
 
 	.hero-featured .subtitle {
@@ -3138,7 +3144,8 @@ body.dark-mode .site-footer {
 	}
 
 	.hero-featured {
-		min-height: 860px;
+		min-height: auto;
+		height: auto;
 	}
 }
 
@@ -3168,7 +3175,8 @@ body.dark-mode .site-footer {
 	}
 
 	.hero-featured {
-		min-height: 350px;
+		min-height: auto;
+		height: auto;
 	}
 
 	.card-list {
@@ -3203,7 +3211,7 @@ body.dark-mode .site-footer {
 	}
 
 	.category-card-item a h3 {
-		font-size: 0.95rem;
+		font-size: 0.75rem;
 	}
 
 	.category-card-item a p {
