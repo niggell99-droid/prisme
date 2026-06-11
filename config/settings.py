@@ -129,6 +129,18 @@ else:
         }
     }
 
+# Configuration de Supabase Storage
+SUPABASE_URL = os.environ.get('SUPABASE_URL')
+SUPABASE_KEY = os.environ.get('SUPABASE_ANON_KEY')
+SUPABASE_BUCKET = 'media' 
+
+# Définir Supabase comme stockage par défaut pour les fichiers médias (Images)
+DEFAULT_FILE_STORAGE = 'django_supabase_storage.storage.SupabaseMediaStorage'
+
+# URL publique pour afficher les fichiers
+MEDIA_URL = f"{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_BUCKET}/"
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -176,8 +188,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Configuration pour les fichiers uploadés (images, vidéos)
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#MEDIA_URL = '/media/'
+#MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Coniguration des chemins d'upload pour CKEditor
 # Django CKEditor 5 Configuration
