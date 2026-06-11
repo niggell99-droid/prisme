@@ -20,7 +20,7 @@ django-supabase-storage==1.0.1
 django-unfold==0.76.0
 docstring_parser==0.18.0
 google-ai-generativelanguage==0.6.15
-google-api-core==2.30.3
+google-api-core==>2.15.0
 google-api-python-client==2.195.0
 google-auth==2.50.0
 google-auth-httplib2==0.3.1
@@ -31,7 +31,7 @@ google-generativeai==0.8.6
 google-resumable-media==2.10.0
 googleapis-common-protos==1.74.0
 grpcio==1.80.0
-grpcio-status==1.71.2
+grpcio-status==>1.50.0
 gunicorn==25.1.0
 h11==0.16.0
 h2==4.3.0
