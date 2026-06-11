@@ -140,6 +140,10 @@ DEFAULT_FILE_STORAGE = 'django_supabase_storage.storage.SupabaseMediaStorage'
 # URL publique pour afficher les fichiers
 MEDIA_URL = f"{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_BUCKET}/"
 
+# Force CKEditor à utiliser votre stockage Supabase
+CKEDITOR_5_FILE_STORAGE = "django_supabase_storage.storage.SupabaseMediaStorage"
+
+
 
 
 # Password validation
