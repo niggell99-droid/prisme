@@ -134,15 +134,15 @@ SUPABASE_URL = os.environ.get('SUPABASE_URL')
 SUPABASE_KEY = os.environ.get('SUPABASE_ANON_KEY')
 SUPABASE_BUCKET = 'media' 
 
-# Définir Supabase comme stockage par défaut pour les fichiers médias (Images)
-DEFAULT_FILE_STORAGE = 'django_supabase_storage.storage.SupabaseMediaStorage'
-
-# URL publique pour afficher les fichiers
-MEDIA_URL = f"{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_BUCKET}/"
-
-# Force CKEditor à utiliser votre stockage Supabase
-CKEDITOR_5_FILE_STORAGE = "django_supabase_storage.storage.SupabaseMediaStorage"
-
+if SUPABASE_URL and SUPABASE_KEY:
+    # CONFIGURATION PRODUCTION (RENDER + SUPABASE)
+    DEFAULT_FILE_STORAGE = 'django_supabase_storage.storage.SupabaseMediaStorage'
+    CKEDITOR_5_FILE_STORAGE = "django_supabase_storage.storage.SupabaseMediaStorage"
+    MEDIA_URL = f"{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_BUCKET}/"
+else:
+    # CONFIGURATION LOCALE (VOTRE ORDINATEUR)
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 
