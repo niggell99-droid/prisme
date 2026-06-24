@@ -139,13 +139,13 @@ if SUPABASE_URL and SUPABASE_KEY:
     # PRODUCTION : Supabase Storage (Render + Supabase)
     STORAGES = {
         "default": {
-            "BACKEND": "django_supabase_storage.storage.SupabaseMediaStorage",
+            "BACKEND": "django_supabase_storage.SupabaseMediaStorage",
         },
         "staticfiles": {
             "BACKEND": "whitenoise.storage.StaticFilesStorage",
         },
     }
-    CKEDITOR_5_FILE_STORAGE = "django_supabase_storage.storage.SupabaseMediaStorage"
+    CKEDITOR_5_FILE_STORAGE = "django_supabase_storage.SupabaseMediaStorage"
     MEDIA_URL = f"{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_BUCKET}/"
 else:
     # DÉVELOPPEMENT : FileSystem local

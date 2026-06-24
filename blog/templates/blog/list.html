@@ -18,7 +18,7 @@
                 {% if article.featured_image %}
                 <img src='{{ article.featured_image.url }}' alt='{{ article.title }}'>
                 {% else %}
-                <img src='{% static 'core/assets/img/default_article.jpg' %}' alt='Image par défaut' style='background: #e2e8f0;'>
+                <img src='{% static 'core/assets/img/starship_carousel2_card4_v2_m.jpg' %}' alt='Image par défaut' style='background: #e2e8f0;'>
                 {% endif %}
                 <span class='badge-difficulty' style='background: var(--accent); color: white;'>{{ article.category.name|default:'Article' }}</span>
             </div>
