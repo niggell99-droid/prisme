@@ -4,6 +4,7 @@ from django.urls import reverse
 from django_ckeditor_5.fields import CKEditor5Field
 from django.utils import timezone
 from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.models import ContentType
 from core.models import Comment
 
 # 1. Modèle pour les Catégories
@@ -38,7 +39,7 @@ VIDEO_STATUS_CHOICES = [
 class Article(models.Model):
     # Informations de base
     title = models.CharField(max_length=255)
-    slug = models.SlugField(unique=True) # ID pour l'URL
+    slug = models.SlugField(max_length=255, unique=True) # ID pour l'URL
     excerpt = models.TextField(blank=True, help_text="Résumé ou accroche pour la page d'accueil")
     # CKEditor5Field for rich text editing
     content = CKEditor5Field('Contenu de l\'article', config_name='extends')
@@ -83,6 +84,10 @@ class Article(models.Model):
     def __str__(self):
         return self.title
     
+    def get_content_type_id(self):
+        """Retourne l'ID du ContentType pour le modèle Article (utilisé par le système de commentaires)."""
+        return ContentType.objects.get_for_model(self).pk
+
     def get_absolute_url(self):
         """
         Retourne l'URL canonique pour un objet Article donné, 

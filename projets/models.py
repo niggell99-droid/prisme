@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django_ckeditor_5.fields import CKEditor5Field
 from django.contrib.contenttypes.fields import GenericRelation
+from django.contrib.contenttypes.models import ContentType
 from core.models import Comment
 
 
@@ -52,6 +53,10 @@ class Projet(models.Model):
     def __str__(self):
         return self.title
     
+    def get_content_type_id(self):
+        """Retourne l'ID du ContentType pour le modèle Projet (utilisé par le système de commentaires)."""
+        return ContentType.objects.get_for_model(self).pk
+
     def get_absolute_url(self):
         # Utilise le namespace 'projets' pour reverse
         return reverse('projets:projet_detail', kwargs={'slug': self.slug})
