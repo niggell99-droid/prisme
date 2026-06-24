@@ -1945,7 +1945,7 @@ body.dark-mode .category-card-item a:hover {
 
 .newsletter-cta-full {
 	background: linear-gradient(135deg, var(--accent) 0%, rgba(30, 136, 229, 0.8) 100%);
-	padding: 4rem 2rem;
+	padding: 1rem 2rem;
 	color: white;
 	text-align: center;
 	margin: 3rem 0 0 0;
@@ -2217,6 +2217,10 @@ body.dark-mode .category-card-item a:hover {
 	padding: .75rem;
 	border-radius: 8px;
 	border: 1px solid #e6e9ef;
+}
+
+.search-toggle {
+	display: none;
 }
 
 /*======================================================================
@@ -2520,6 +2524,10 @@ body.dark-mode .site-footer {
 @media (max-width: 982px) {
 	.site-header {
 		height: 60px;
+	}
+
+	.search-toggle {
+		display: flex;
 	}
 
 	.search-overlay {
@@ -2918,10 +2926,22 @@ body.dark-mode .site-footer {
 		margin-bottom: 1.5rem;
 	}
 
+	.site-footer {
+		padding-top: 0.1rem;
+	}
+
 	.footer-grid {
 		grid-template-columns: 1fr;
 		gap: 2rem;
+		justify-items: center;
 	}
+
+	/* .footer-grid h4 {
+		position: absolute;
+		border-left: none;
+		border-bottom: 3px solid var(--color-accent);
+
+	} */
 
 	.footer-about {
 		order: 1;
@@ -2937,6 +2957,10 @@ body.dark-mode .site-footer {
 
 	.footer-cta {
 		order: 4;
+	}
+	.newsletter-form {
+		display: grid;
+		grid-column: 1;
 	}
 
 	.footer-bottom {

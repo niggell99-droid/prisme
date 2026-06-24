@@ -2,28 +2,27 @@
 <!DOCTYPE html>
 <html lang="fr">
 
+{% load static %}
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="description"
-        content="Prisme — tutoriels, projets et analyses sur l'ingénierie, la robotique, la mécatronique et l'IA.">
-    <meta property="og:title" content="Prisme — Média & Ingénierie">
-    <meta property="og:description"
-        content="Tutoriels, projets et analyses sur l'ingénierie, la robotique, la mécatronique et l'IA.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="{% static 'core/assets/img/prisme_og.png' %}">
-    <meta property="og:url" content="https://ton-site.example/">
+
+    <meta name="description" content="{% block meta_description %}Prisme — tutoriels, projets et analyses sur l'ingénierie, la robotique, la mécatronique et l'IA.{% endblock %}">
+
+    <meta property="og:title" content="{% block og_title %}Prisme — Média & Ingénierie{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Tutoriels, projets et analyses sur l'ingénierie, la robotique, la mécatronique et l'IA.{% endblock %}">
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{{ request.scheme }}://{{ request.get_host }}{% static 'core/assets/img/prisme_og.png' %}{% endblock %}">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+
     <meta name="twitter:card" content="summary_large_image">
     <meta name="color-scheme" content="light dark">
+
     <link rel="icon" type="image/png" href="{% static 'favicon.png' %}">
-    <title>
-        {% block title %}Prisme — Média & Ingénierie{% endblock title %}
-    </title>
+    <title>{% block title %}Prisme — Média & Ingénierie{% endblock %}</title>
 
     <link rel="stylesheet" href="{% static 'core/assets/css/style.css' %}?v=14">
-
-    {% block extra_css %}
-    {% endblock extra_css %}
+    {% block extra_css %}{% endblock %}
 </head>
 
 <body>

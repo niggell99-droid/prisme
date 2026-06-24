@@ -1,6 +1,11 @@
 {% extends 'core/base.html' %}
 {% load static %}
-{% block title %}{{ article.title }} - Prisme{% endblock %}
+{% block meta_description %}{{ article.excerpt|truncatechars:160 }}{% endblock %}
+{% block og_title %}{{ article.title }} — Prisme{% endblock %}
+{% block og_description %}{{ article.excerpt|truncatechars:200 }}{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block og_image %}{{ request.scheme }}://{{ request.get_host }}{{ article.image.url }}{% endblock %}
+{% block title %}{{ article.title }} — Prisme{% endblock %}
 
 {% block content %}
 <link rel='stylesheet' href='{% static ' core/assets/css/project.css' %}?v=4'>
