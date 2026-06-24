@@ -132,15 +132,32 @@ else:
 # Configuration de Supabase Storage
 SUPABASE_URL = os.environ.get('SUPABASE_URL')
 SUPABASE_KEY = os.environ.get('SUPABASE_ANON_KEY')
-SUPABASE_BUCKET = 'media' 
+SUPABASE_BUCKET = 'media'
 
+# Configuration du stockage des fichiers media
 if SUPABASE_URL and SUPABASE_KEY:
-    # CONFIGURATION PRODUCTION (RENDER + SUPABASE)
-    DEFAULT_FILE_STORAGE = 'django_supabase_storage.storage.SupabaseMediaStorage'
+    # PRODUCTION : Supabase Storage (Render + Supabase)
+    STORAGES = {
+        "default": {
+            "BACKEND": "django_supabase_storage.storage.SupabaseMediaStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.StaticFilesStorage",
+        },
+    }
     CKEDITOR_5_FILE_STORAGE = "django_supabase_storage.storage.SupabaseMediaStorage"
     MEDIA_URL = f"{SUPABASE_URL}/storage/v1/object/public/{SUPABASE_BUCKET}/"
 else:
-    # CONFIGURATION LOCALE (VOTRE ORDINATEUR)
+    # DÉVELOPPEMENT : FileSystem local
+    STORAGES = {
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.StaticFilesStorage",
+        },
+    }
+    CKEDITOR_5_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -266,7 +283,7 @@ CKEDITOR_5_CONFIGS = {
     }
 }
 
-CKEDITOR_5_FILE_STORAGE = "django.core.files.storage.FileSystemStorage"
+# CKEDITOR_5_FILE_STORAGE est configuré dans le bloc STORAGES ci-dessus
 
 
 # --- PARAMÈTRES SESSIONS ---
@@ -320,11 +337,4 @@ SOCIALACCOUNT_PROVIDERS = {
 
 # DATABASE_URL override is handled above in the Database section
 
-STORAGES = {
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
-    },
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.StaticFilesStorage", # Modifié temporairement pour éviter l'erreur 500 liée aux fichiers manquants
-    },
-}
+# STORAGES est configuré dans le bloc conditionnel Supabase ci-dessus
