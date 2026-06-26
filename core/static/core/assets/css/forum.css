@@ -483,6 +483,7 @@ body.dark-mode {
     box-shadow:
         0 24px 60px -20px rgba(0, 0, 0, 0.55),
         inset 0 0 80px rgba(30, 136, 229, 0.05);
+    object-fit: cover;
 }
 
 .live-player::before {
@@ -706,7 +707,7 @@ body.dark-mode {
 
     .live-player {
         /* padding-top: 3rem; */
-        padding-bottom: 4rem;
+        padding-bottom: 1rem;
     }
 
     /* .offline-state {
