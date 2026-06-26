@@ -705,17 +705,17 @@ body.dark-mode {
     }
 
     .live-player {
-        padding-top: 3rem;
-        padding-bottom: 5rem;
+        /* padding-top: 3rem; */
+        padding-bottom: 4rem;
     }
 
     /* .offline-state {
         padding-bottom: 5.5rem;
     }*/
 
-    .offline-icon {
+    /* .offline-icon {
         padding-top: 1rem;
-    }  
+    }   */
 }
 
 @media (max-width: 768px) {
