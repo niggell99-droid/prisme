@@ -28,7 +28,7 @@
                 <p>{{ article.excerpt|default:article.content|striptags|truncatechars:120 }}</p>
                 <div class='project-meta-footer'>
                     <div class='project-duration'>
-                        <span>{{ article.date_published|date:'d M Y' }}</span>
+                        <span>{{ article.publication_date|date:'d M Y' }}</span>
                     </div>
                     <span class='project-cta'>Lire l'article</span>
                 </div>

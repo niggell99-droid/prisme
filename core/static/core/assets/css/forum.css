@@ -570,6 +570,13 @@ body.dark-mode {
     gap: 0.5rem;
 }
 
+.replay-card-section {
+    display: flex; 
+    gap: 1.5rem; 
+    overflow-x: auto; 
+    padding-bottom: 1rem;
+}
+
 .replay-card {
     min-width: 265px;
     background: var(--forum-surface);
@@ -719,6 +726,10 @@ body.dark-mode {
 
     .topic-card {
         padding: 1.4rem;
+    }
+
+    .replay-card-section {
+        display: block; 
     }
 
     .live-bottom-grid {
