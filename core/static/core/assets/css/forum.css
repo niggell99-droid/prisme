@@ -703,6 +703,19 @@ body.dark-mode {
     .replay-card-section {
         display: block; 
     }
+
+    .live-player {
+        padding-top: 3rem;
+        padding-bottom: 5rem;
+    }
+
+    /* .offline-state {
+        padding-bottom: 5.5rem;
+    }*/
+
+    .offline-icon {
+        padding-top: 1rem;
+    }  
 }
 
 @media (max-width: 768px) {
@@ -735,19 +748,6 @@ body.dark-mode {
     .live-bottom-grid {
         grid-template-columns: 1fr;
     }
-
-    .live-player {
-        padding-top: 3rem;
-        padding-bottom: 5rem;
-    }
-
-    /* .offline-state {
-        padding-bottom: 5.5rem;
-    }*/
-
-    .offline-icon {
-        padding-top: 1rem;
-    }  
 }
 
 @media (max-width: 480px) {
