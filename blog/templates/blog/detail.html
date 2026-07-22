@@ -8,792 +8,187 @@
 {% block title %}{{ article.title }} — Prisme{% endblock %}
 
 {% block content %}
-<link rel='stylesheet' href='{% static ' core/assets/css/project.css' %}?v=4'>
-<link rel='stylesheet' href='{% static ' core/assets/css/article.css' %}?v=6'>
-<style>
-  /* ===== ARTICLE DETAIL PAGE - PREMIUM ADAPTIVE ===== */
-
-  /* ── Local variables (adaptive) ── */
-  :root {
-    --ad-heading:      #0f172a;
-    --ad-body:         #374151;
-    --ad-surface:      var(--card);
-    --ad-border:       var(--border-color);
-    --ad-muted:        var(--muted);
-    --ad-author-bg:    #f8fafc;
-    --ad-meta-sep:     rgba(0,0,0,0.06);
-    --ad-code-bg:      rgba(0,0,0,0.06);
-    --ad-placeholder:  linear-gradient(135deg, #1e293b 0%, #334155 100%);
-  }
-  body.dark-mode {
-    --ad-heading:      #f1f5f9;
-    --ad-body:         #cbd5e1;
-    --ad-surface:      rgba(30,41,59,0.6);
-    --ad-border:       rgba(255,255,255,0.09);
-    --ad-muted:        #94a3b8;
-    --ad-author-bg:    rgba(30,41,59,0.7);
-    --ad-meta-sep:     rgba(255,255,255,0.07);
-    --ad-code-bg:      rgba(255,255,255,0.08);
-    --ad-placeholder:  linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #334155 100%);
-  }
-
-  /* Hero Section */
-  .article-detail-hero {
-    position: relative;
-    margin-top: 4rem;
-    padding: 3rem 1.5rem;
-    text-align: center;
-    max-width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  /* Animated gradient background */
-  .article-detail-hero::before {
-    content: "";
-    position: absolute;
-    top: -100px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120%;
-    height: 400px;
-    background: radial-gradient(ellipse at center, rgba(30, 136, 229, 0.08) 0%, transparent 70%);
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  /* Category Badge */
-  .article-category-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: linear-gradient(135deg, rgba(30, 136, 229, 0.15), rgba(30, 136, 229, 0.08));
-    color: var(--accent, #1e88e5);
-    padding: 0.5rem 1.2rem;
-    border-radius: 999px;
-    font-family: var(--font-heading, 'Outfit', sans-serif);
-    font-weight: 700;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    border: 1px solid rgba(30, 136, 229, 0.25);
-    margin-bottom: 2rem;
-    animation: fadeInDown 0.6s ease;
-    transition: all 0.3s ease;
-  }
-
-  .article-category-badge:hover {
-    transform: translateY(-2px);
-    border-color: var(--accent);
-    box-shadow: 0 4px 12px rgba(30, 136, 229, 0.2);
-  }
-
-  .article-category-badge svg {
-    width: 14px;
-    height: 14px;
-  }
-
-  /* Title */
-  .article-detail-title {
-    font-family: var(--font-heading, 'Outfit', sans-serif);
-    font-size: clamp(2.2rem, 5vw, 3.5rem);
-    font-weight: 800;
-    line-height: 1.15;
-    letter-spacing: -0.03em;
-    color: var(--ad-heading);
-    margin-bottom: 2rem;
-    animation: fadeInUp 0.6s ease 0.1s both;
-  }
-
-  /* Meta Info */
-  .article-meta-info {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-    animation: fadeInUp 0.6s ease 0.2s both;
-  }
-
-  .article-author-info {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-
-  .article-author-avatar {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid rgba(30, 136, 229, 0.3);
-    transition: all 0.3s ease;
-  }
-
-  .article-author-avatar:hover {
-    border-color: var(--accent);
-    transform: scale(1.05);
-  }
-
-  .article-author-name {
-    font-family: var(--font-heading, 'Outfit', sans-serif);
-    font-weight: 600;
-    color: var(--ad-heading);
-    font-size: 0.95rem;
-  }
-
-  .article-meta-separator {
-    width: 4px;
-    height: 4px;
-    background: var(--ad-muted);
-    border-radius: 50%;
-  }
-
-  .article-meta-date,
-  .article-meta-read-time {
-    font-family: var(--font-heading, 'Outfit', sans-serif);
-    font-size: 0.9rem;
-    color: var(--ad-muted);
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-
-  .article-meta-date svg,
-  .article-meta-read-time svg {
-    width: 16px;
-    height: 16px;
-    opacity: 0.7;
-  }
-
-  /* Featured Image */
-  .article-featured-image-wrapper {
-    position: relative;
-    max-width: 1000px;
-    margin: 0 auto 4rem auto;
-    padding: 0 1.5rem;
-    animation: fadeInUp 0.8s ease 0.3s both;
-  }
-
-  .article-featured-image {
-    width: 100%;
-    height: auto;
-    max-height: 550px;
-    object-fit: cover;
-    border-radius: 20px;
-    box-shadow:
-      0 25px 50px -12px rgba(0, 0, 0, 0.15),
-      0 0 0 1px rgba(0, 0, 0, 0.05);
-    transition: transform 0.5s ease, box-shadow 0.5s ease;
-  }
-
-  .article-featured-image:hover {
-    transform: translateY(-4px);
-    box-shadow:
-      0 35px 60px -15px rgba(0, 0, 0, 0.2),
-      0 0 0 1px rgba(0, 0, 0, 0.05);
-  }
-
-  .article-featured-placeholder {
-    width: 100%;
-    height: 400px;
-    background: var(--ad-placeholder);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .article-featured-placeholder::before {
-    content: "";
-    position: absolute;
-    width: 150%;
-    height: 150%;
-    background: radial-gradient(ellipse at center, rgba(30, 136, 229, 0.15) 0%, transparent 60%);
-    animation: pulse 4s ease-in-out infinite;
-  }
-
-  .article-featured-placeholder svg {
-    width: 64px;
-    height: 64px;
-    color: rgba(255, 255, 255, 0.3);
-  }
-
-  /* Layout */
-  .article-detail-layout {
-    display: grid;
-    grid-template-columns: 1fr 320px;
-    gap: 4rem;
-    max-width: 1200px;
-    margin: 0 auto 6rem auto;
-    padding: 0 1.5rem;
-  }
-
-  /* Main Content */
-  .article-detail-main {
-    min-width: 0;
-  }
-
-  .article-detail-body {
-    font-family: var(--font-serif, 'Merriweather', serif);
-    font-size: 1.125rem;
-    line-height: 1.9;
-    color: var(--ad-body);
-    max-width: 750px;
-  }
-
-  .article-detail-body p {
-    margin-bottom: 1.75rem;
-  }
-
-  .article-detail-body h2 {
-    font-family: var(--font-heading, 'Outfit', sans-serif);
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: var(--ad-heading);
-    margin: 3rem 0 1.25rem 0;
-    position: relative;
-    padding-left: 1rem;
-  }
-
-  .article-detail-body h2::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.2em;
-    width: 4px;
-    height: 1em;
-    background: linear-gradient(to bottom, var(--accent, #1e88e5), transparent);
-    border-radius: 2px;
-  }
-
-  .article-detail-body h3 {
-    font-family: var(--font-heading, 'Outfit', sans-serif);
-    font-size: 1.35rem;
-    font-weight: 600;
-    color: var(--ad-heading);
-    margin: 2.5rem 0 1rem 0;
-  }
-
-  .article-detail-body a {
-    color: var(--accent, #1e88e5);
-    text-decoration: underline;
-    text-decoration-color: rgba(30, 136, 229, 0.3);
-    text-underline-offset: 3px;
-    transition: all 0.2s ease;
-  }
-
-  .article-detail-body a:hover {
-    text-decoration-color: var(--accent);
-  }
-
-  .article-detail-body blockquote {
-    margin: 2.5rem 0;
-    padding: 1.5rem 2rem;
-    background: rgba(30, 136, 229, 0.05);
-    border-left: 4px solid var(--accent, #1e88e5);
-    border-radius: 0 12px 12px 0;
-    font-style: italic;
-    color: var(--ad-muted);
-  }
-
-  .article-detail-body img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 12px;
-    margin: 2rem 0;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  }
-
-  .article-detail-body ul,
-  .article-detail-body ol {
-    margin: 1.5rem 0;
-    padding-left: 1.5rem;
-  }
-
-  .article-detail-body li {
-    margin-bottom: 0.75rem;
-  }
-
-  .article-detail-body code {
-    background: var(--ad-code-bg);
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-    font-size: 0.9em;
-    font-family: 'Fira Code', 'Monaco', monospace;
-  }
-
-  /* Code blocks always use dark background for readability */
-  .article-detail-body pre {
-    background: #1e293b;
-    color: #e2e8f0;
-    padding: 1.5rem;
-    border-radius: 12px;
-    overflow-x: auto;
-    margin: 2rem 0;
-  }
-
-  .article-detail-body pre code {
-    background: transparent;
-    padding: 0;
-    color: inherit;
-  }
-
-  /* Author Card */
-  .article-author-card-pro {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    background: var(--ad-author-bg);
-    border: 1px solid var(--ad-border);
-    border-radius: 16px;
-    padding: 2rem;
-    margin-top: 4rem;
-    transition: all 0.3s ease;
-  }
-
-  .article-author-card-pro:hover {
-    border-color: rgba(30, 136, 229, 0.25);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
-    transform: translateY(-2px);
-  }
-
-  .article-author-card-pro .author-avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid rgba(30, 136, 229, 0.22);
-    flex-shrink: 0;
-  }
-
-  .article-author-card-pro .author-info h3 {
-    font-family: var(--font-heading, 'Outfit', sans-serif);
-    font-size: 1.15rem;
-    font-weight: 700;
-    margin: 0 0 0.3rem 0;
-    color: var(--ad-heading);
-  }
-
-  .article-author-card-pro .author-info p {
-    font-size: 0.9rem;
-    color: var(--ad-muted);
-    margin: 0 0 1rem 0;
-  }
-
-  .article-author-card-pro .author-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--accent, #1e88e5);
-    text-decoration: none;
-    transition: gap 0.2s ease;
-  }
-
-  .article-author-card-pro .author-link:hover {
-    gap: 0.7rem;
-  }
-
-  .article-author-card-pro .author-link svg {
-    width: 16px;
-    height: 16px;
-  }
-
-  /* Sidebar */
-  .article-detail-sidebar {
-    position: sticky;
-    top: 100px;
-    height: fit-content;
-  }
-
-  .sidebar-card-pro {
-    background: var(--ad-surface);
-    border: 1px solid var(--ad-border);
-    border-radius: 16px;
-    padding: 1.75rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
-    transition: all 0.3s ease;
-  }
-
-  .sidebar-card-pro:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.09);
-    border-color: rgba(30, 136, 229, 0.2);
-  }
-
-  .sidebar-card-pro h3 {
-    font-family: var(--font-heading, 'Outfit', sans-serif);
-    font-size: 0.82rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--ad-muted);
-    margin: 0 0 1.25rem 0;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px solid var(--accent, #1e88e5);
-    display: inline-block;
-  }
-
-  .sidebar-meta-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .sidebar-meta-list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.9rem 0;
-    border-bottom: 1px solid var(--ad-meta-sep);
-    font-size: 0.9rem;
-  }
-
-  .sidebar-meta-list li:last-child {
-    border-bottom: none;
-  }
-
-  .sidebar-meta-list .meta-label {
-    color: var(--ad-muted);
-    font-weight: 500;
-  }
-
-  .sidebar-meta-list .meta-value {
-    font-weight: 700;
-    color: var(--ad-heading);
-  }
-
-  /* Share Buttons */
-  .share-buttons-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.75rem;
-  }
-
-  .share-btn-pro {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4rem;
-    padding: 0.75rem 0.5rem;
-    border-radius: 10px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    color: #fff;
-  }
-
-  .share-btn-pro.linkedin {
-    background: linear-gradient(135deg, #0077b5, #005582);
-  }
-
-  .share-btn-pro.twitter {
-    background: linear-gradient(135deg, #1da1f2, #0c85d0);
-  }
-
-  .share-btn-pro.facebook {
-    background: linear-gradient(135deg, #1877f2, #0d5bbf);
-  }
-
-  .share-btn-pro:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-  }
-
-  .share-btn-pro svg {
-    width: 16px;
-    height: 16px;
-  }
-
-  /* Tags Section */
-  .sidebar-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .sidebar-tag {
-    background: rgba(30, 136, 229, 0.09);
-    color: var(--accent, #1e88e5);
-    padding: 0.4rem 0.9rem;
-    border-radius: 999px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    transition: all 0.2s ease;
-    text-decoration: none;
-    border: 1px solid rgba(30, 136, 229, 0.18);
-  }
-
-  .sidebar-tag:hover {
-    background: var(--accent);
-    color: #fff;
-    border-color: var(--accent);
-    transform: translateY(-1px);
-  }
-
-  /* Animations */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes fadeInDown {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes pulse {
-
-    0%,
-    100% {
-      opacity: 0.5;
-      transform: scale(1);
-    }
-
-    50% {
-      opacity: 0.8;
-      transform: scale(1.05);
-    }
-  }
-
-  /* Responsive */
-  @media (max-width: 900px) {
-    .article-detail-layout {
-      grid-template-columns: 1fr;
-      gap: 3rem;
-    }
-
-    .article-detail-sidebar {
-      position: static;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .article-detail-hero {
-      padding: 2rem 1rem;
-      margin-top: 2rem;
-    }
-
-    .article-detail-title {
-      font-size: 1.75rem;
-    }
-
-    .article-meta-info {
-      gap: 1rem;
-    }
-
-    .article-featured-image {
-      border-radius: 12px;
-    }
-
-    .article-author-card-pro {
-      flex-direction: column;
-      text-align: center;
-    }
-
-    .share-buttons-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  /* Dark mode overrides handled via CSS variables above */
-</style>
-
-<!-- Hero Section -->
-<div class="article-detail-hero">
-  <!-- Category Badge -->
-  {% if article.category %}
-  <span class="article-category-badge">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-      stroke-linecap="round" stroke-linejoin="round">
-      <path d="M4 4h6l2 3h8a2 2 0 012 2v9a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" />
-    </svg>
-    {{ article.category.name }}
-  </span>
-  {% else %}
-  <span class="article-category-badge">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-      stroke-linecap="round" stroke-linejoin="round">
-      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
-      <path d="M14 2v6h6" />
-      <path d="M16 13H8" />
-      <path d="M16 17H8" />
-      <path d="M10 9H8" />
-    </svg>
-    Article
-  </span>
-  {% endif %}
-
-  <!-- Title -->
-  <h1 class="article-detail-title">{{ article.title }}</h1>
-
-  <!-- Meta Info -->
-  <div class="article-meta-info">
-    {% if article.author %}
-    <div class="article-author-info">
-      <img
-        src="{% if article.author.profil.avatar %}{{ article.author.profil.avatar.url }}{% else %}{% static 'core/assets/icons/default_user.svg' %}{% endif %}"
-        alt="{{ article.author.username }}" class="article-author-avatar">
-      <span class="article-author-name">{{ article.author.username }}</span>
-    </div>
-    <span class="article-meta-separator"></span>
+<link rel='stylesheet' href='{% static 'core/assets/css/article.css' %}?v=7'>
+
+<div class="article-page">
+
+  <!-- Hero Section -->
+  <div class="article-detail-hero">
+    <!-- Category Badge -->
+    {% if article.category %}
+    <span class="article-category-badge">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h6l2 3h8a2 2 0 012 2v9a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" />
+      </svg>
+      {{ article.category.name }}
+    </span>
+    {% else %}
+    <span class="article-category-badge">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+        <path d="M14 2v6h6" />
+        <path d="M16 13H8" />
+        <path d="M16 17H8" />
+        <path d="M10 9H8" />
+      </svg>
+      Article
+    </span>
     {% endif %}
 
-    <span class="article-meta-date">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-        <line x1="16" y1="2" x2="16" y2="6" />
-        <line x1="8" y1="2" x2="8" y2="6" />
-        <line x1="3" y1="10" x2="21" y2="10" />
-      </svg>
-      {{ article.publication_date|date:'d F Y' }}
-    </span>
+    <!-- Title -->
+    <h1 class="article-detail-title">{{ article.title }}</h1>
 
-    <span class="article-meta-separator"></span>
-
-    <span class="article-meta-read-time">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="10" />
-        <polyline points="12 6 12 12 16 14" />
-      </svg>
-      {{ article.reading_time|default:'5' }} min de lecture
-    </span>
-  </div>
-</div>
-
-<!-- Featured Image -->
-<div class="article-featured-image-wrapper">
-  {% if article.hero %}
-  <img src="{{ article.hero.url }}" alt="{{ article.title }}" class="article-featured-image">
-  {% elif article.featured_image %}
-  <img src="{{ article.featured_image.url }}" alt="{{ article.title }}" class="article-featured-image">
-  {% else %}
-  <div class="article-featured-placeholder">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
-      stroke-linecap="round" stroke-linejoin="round">
-      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-      <circle cx="8.5" cy="8.5" r="1.5" />
-      <polyline points="21 15 16 10 5 21" />
-    </svg>
-  </div>
-  {% endif %}
-</div>
-
-<!-- Content Layout -->
-<div class="article-detail-layout">
-  <!-- Main Content -->
-  <main class="article-detail-main">
-    <article class="article-detail-body">
-      {{ article.content|safe }}
-    </article>
-
-    <!-- Author Card -->
-    {% if article.author %}
-    <aside class="article-author-card-pro">
-      <img
-        src="{% if article.author.profil.avatar %}{{ article.author.profil.avatar.url }}{% else %}{% static 'core/assets/icons/default_user.svg' %}{% endif %}"
-        alt="{{ article.author.username }}" class="author-avatar">
-      <div class="author-info">
-        <h3>{{ article.author.username }}</h3>
-        <p>Auteur sur Prisme</p>
-        <a href="{% url 'profil_detail' article.author.pk %}" class="author-link">
-          Voir le profil
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12h14" />
-            <path d="M12 5l7 7-7 7" />
-          </svg>
-        </a>
+    <!-- Meta Info -->
+    <div class="article-meta-info">
+      {% if article.author %}
+      <div class="article-author-info">
+        <img
+          src="{% if article.author.profil.avatar %}{{ article.author.profil.avatar.url }}{% else %}{% static 'core/assets/icons/default_user.svg' %}{% endif %}"
+          alt="{{ article.author.username }}" class="article-author-avatar">
+        <span class="article-author-name">{{ article.author.username }}</span>
       </div>
+      <span class="article-meta-separator"></span>
+      {% endif %}
+
+      <span class="article-meta-date">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+          <line x1="16" y1="2" x2="16" y2="6" />
+          <line x1="8" y1="2" x2="8" y2="6" />
+          <line x1="3" y1="10" x2="21" y2="10" />
+        </svg>
+        {{ article.publication_date|date:'d F Y' }}
+      </span>
+
+      <span class="article-meta-separator"></span>
+
+      <span class="article-meta-read-time">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <polyline points="12 6 12 12 16 14" />
+        </svg>
+        {{ article.reading_time|default:'5' }} min de lecture
+      </span>
+    </div>
+  </div>
+
+  <!-- Featured Image -->
+  <div class="article-featured-image-wrapper">
+    {% if article.hero %}
+    <img src="{{ article.hero.url }}" alt="{{ article.title }}" class="article-featured-image">
+    {% elif article.featured_image %}
+    <img src="{{ article.featured_image.url }}" alt="{{ article.title }}" class="article-featured-image">
+    {% else %}
+    <div class="article-featured-placeholder">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
+        stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+        <circle cx="8.5" cy="8.5" r="1.5" />
+        <polyline points="21 15 16 10 5 21" />
+      </svg>
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- Content Layout -->
+  <div class="article-detail-layout">
+    <!-- Main Content -->
+    <main class="article-detail-main">
+      <article class="article-detail-body">
+        {{ article.content|safe }}
+      </article>
+
+      <!-- Author Card -->
+      {% if article.author %}
+      <aside class="article-author-card-pro">
+        <img
+          src="{% if article.author.profil.avatar %}{{ article.author.profil.avatar.url }}{% else %}{% static 'core/assets/icons/default_user.svg' %}{% endif %}"
+          alt="{{ article.author.username }}" class="author-avatar">
+        <div class="author-info">
+          <h3>{{ article.author.username }}</h3>
+          <p>Auteur sur Prisme</p>
+          <a href="{% url 'profil_detail' article.author.pk %}" class="author-link">
+            Voir le profil
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14" />
+              <path d="M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </aside>
+      {% endif %}
+
+      <!-- Comments Section -->
+      {% include "core/includes/comments.html" with object=article comments=comments comment_form=comment_form %}
+    </main>
+
+    <!-- Sidebar -->
+    <aside class="article-detail-sidebar">
+      <!-- Details Card -->
+      <div class="sidebar-card-pro">
+        <h3>Détails</h3>
+        <ul class="sidebar-meta-list">
+          <li>
+            <span class="meta-label">Catégorie</span>
+            <span class="meta-value">{{ article.category.name|default:'Non classé' }}</span>
+          </li>
+          <li>
+            <span class="meta-label">Publication</span>
+            <span class="meta-value">{{ article.date_published|date:'M Y' }}</span>
+          </li>
+          <li>
+            <span class="meta-label">Temps de lecture</span>
+            <span class="meta-value">{{ article.reading_time|default:'5' }} min</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Share Card -->
+      <div class="sidebar-card-pro">
+        <h3>Partager</h3>
+        <div class="share-buttons-grid">
+          <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ article.title|urlencode }}"
+            target="_blank" rel="noopener" class="share-btn-pro linkedin">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+            </svg>
+          </a>
+          <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ article.title|urlencode }}"
+            target="_blank" rel="noopener" class="share-btn-pro twitter">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          </a>
+          <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank"
+            rel="noopener" class="share-btn-pro facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Related Tags (if available) -->
+      {% if article.tags.all %}
+      <div class="sidebar-card-pro">
+        <h3>Tags</h3>
+        <div class="sidebar-tags">
+          {% for tag in article.tags.all %}
+          <a href="#" class="sidebar-tag">{{ tag.name }}</a>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
     </aside>
-    {% endif %}
+  </div>
 
-    <!-- Comments Section -->
-    {% include "core/includes/comments.html" with object=article comments=comments comment_form=comment_form %}
-  </main>
-
-  <!-- Sidebar -->
-  <aside class="article-detail-sidebar">
-    <!-- Details Card -->
-    <div class="sidebar-card-pro">
-      <h3>Détails</h3>
-      <ul class="sidebar-meta-list">
-        <li>
-          <span class="meta-label">Catégorie</span>
-          <span class="meta-value">{{ article.category.name|default:'Non classé' }}</span>
-        </li>
-        <li>
-          <span class="meta-label">Publication</span>
-          <span class="meta-value">{{ article.date_published|date:'M Y' }}</span>
-        </li>
-        <li>
-          <span class="meta-label">Temps de lecture</span>
-          <span class="meta-value">{{ article.reading_time|default:'5' }} min</span>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Share Card -->
-    <div class="sidebar-card-pro">
-      <h3>Partager</h3>
-      <div class="share-buttons-grid">
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ request.build_absolute_uri }}&title={{ article.title|urlencode }}"
-          target="_blank" rel="noopener" class="share-btn-pro linkedin">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-            <path
-              d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-          </svg>
-        </a>
-        <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ article.title|urlencode }}"
-          target="_blank" rel="noopener" class="share-btn-pro twitter">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-            <path
-              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-          </svg>
-        </a>
-        <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" target="_blank"
-          rel="noopener" class="share-btn-pro facebook">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-            <path
-              d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-          </svg>
-        </a>
-      </div>
-    </div>
-
-    <!-- Related Tags (if available) -->
-    {% if article.tags.all %}
-    <div class="sidebar-card-pro">
-      <h3>Tags</h3>
-      <div class="sidebar-tags">
-        {% for tag in article.tags.all %}
-        <a href="#" class="sidebar-tag">{{ tag.name }}</a>
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
-  </aside>
 </div>
 {% endblock %}

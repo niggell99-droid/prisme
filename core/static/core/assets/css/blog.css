@@ -1,0 +1,389 @@
+/* =========================================
+   BLOG LIST PAGE - PREMIUM STYLES
+   v1.0 - Dedicated blog listing styles
+   ========================================= */
+
+/* ─── Anti horizontal scrollbar ──────────── */
+.blog-page {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* ─── Blog Header ────────────────────────── */
+.blog-header {
+    background: linear-gradient(135deg, var(--nav) 0%, #0f172a 50%, #1a1a2e 100%);
+    color: #fff;
+    padding: 7rem 1.5rem 4.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.blog-header::before {
+    content: "";
+    position: absolute;
+    top: -60%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140%;
+    height: 200%;
+    background:
+        radial-gradient(ellipse at 30% 40%, rgba(30, 136, 229, 0.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 70% 60%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    animation: blogHeaderGlow 10s ease-in-out infinite alternate;
+}
+
+@keyframes blogHeaderGlow {
+    0%   { opacity: 0.6; transform: translateX(-50%) scale(1); }
+    100% { opacity: 1;   transform: translateX(-50%) scale(1.05); }
+}
+
+.blog-header .container {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.blog-header h1 {
+    font-family: var(--font-heading, 'Outfit', sans-serif);
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+}
+
+.blog-header p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.65);
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+/* ─── Blog Grid Section ──────────────────── */
+.blog-list-section {
+    padding: 4rem 1.5rem 5rem;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+/* ─── Blog Card ──────────────────────────── */
+.blog-card {
+    background: var(--card);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border-color, rgba(0, 0, 0, 0.06));
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.04),
+        0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.blog-card:hover {
+    transform: translateY(-6px);
+    box-shadow:
+        0 20px 40px -12px rgba(0, 0, 0, 0.12),
+        0 8px 16px -8px rgba(30, 136, 229, 0.08);
+}
+
+/* Card Image */
+.blog-card-image {
+    position: relative;
+    padding-top: 56.25%; /* 16:9 */
+    overflow: hidden;
+    background: linear-gradient(135deg, #1e293b, #334155);
+}
+
+.blog-card-image img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.blog-card:hover .blog-card-image img {
+    transform: scale(1.06);
+}
+
+/* Gradient overlay on image */
+.blog-card-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.35) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Category badge */
+.blog-card-badge {
+    position: absolute;
+    top: 0.85rem;
+    left: 0.85rem;
+    padding: 0.3rem 0.85rem;
+    border-radius: 999px;
+    font-family: var(--font-heading, 'Outfit', sans-serif);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    background: rgba(30, 136, 229, 0.9);
+    color: #fff;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 2;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Card Content */
+.blog-card-content {
+    padding: 1.4rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.blog-card-content h3 {
+    font-family: var(--font-heading, 'Outfit', sans-serif);
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--text);
+    margin-bottom: 0.6rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.blog-card-content p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+/* Card Footer */
+.blog-card-footer {
+    padding: 0.85rem 1.5rem;
+    background: rgba(0, 0, 0, 0.02);
+    border-top: 1px solid var(--border-color, rgba(0, 0, 0, 0.06));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.blog-card-date {
+    font-family: var(--font-heading, 'Outfit', sans-serif);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.blog-card-date svg {
+    width: 14px;
+    height: 14px;
+    opacity: 0.6;
+}
+
+.blog-card-cta {
+    font-family: var(--font-heading, 'Outfit', sans-serif);
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: gap 0.25s ease;
+}
+
+.blog-card:hover .blog-card-cta {
+    gap: 0.65rem;
+}
+
+.blog-card-cta::after {
+    content: "→";
+    transition: transform 0.25s ease;
+}
+
+.blog-card:hover .blog-card-cta::after {
+    transform: translateX(3px);
+}
+
+/* ─── Empty State ────────────────────────── */
+.blog-empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 5rem 2rem;
+    color: var(--muted);
+}
+
+.blog-empty-state .empty-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.blog-empty-state p {
+    font-size: 1.05rem;
+}
+
+/* ─── Pagination ─────────────────────────── */
+.blog-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 4rem;
+    flex-wrap: wrap;
+}
+
+.blog-pagination a,
+.blog-pagination span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 0.75rem;
+    border-radius: 10px;
+    font-family: var(--font-heading, 'Outfit', sans-serif);
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    border: 1px solid var(--border-color, rgba(0, 0, 0, 0.08));
+    color: var(--text);
+    background: var(--card);
+}
+
+.blog-pagination a:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(30, 136, 229, 0.06);
+    transform: translateY(-1px);
+}
+
+.blog-pagination .active {
+    background: linear-gradient(135deg, var(--accent), #60a5fa);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 4px 12px rgba(30, 136, 229, 0.3);
+}
+
+.blog-pagination .prev-next {
+    font-size: 0.82rem;
+    gap: 0.3rem;
+}
+
+/* ─── Dark Mode ──────────────────────────── */
+body.dark-mode .blog-card {
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark-mode .blog-card-footer {
+    background: rgba(255, 255, 255, 0.03);
+    border-top-color: rgba(255, 255, 255, 0.06);
+}
+
+body.dark-mode .blog-pagination a,
+body.dark-mode .blog-pagination span {
+    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(30, 41, 59, 0.5);
+}
+
+body.dark-mode .blog-pagination a:hover {
+    border-color: var(--accent);
+    background: rgba(30, 136, 229, 0.12);
+}
+
+body.dark-mode .blog-header {
+    background: linear-gradient(135deg, #060a10 0%, #0b1220 50%, #0f172a 100%);
+}
+
+/* ─── Responsive ─────────────────────────── */
+@media (max-width: 768px) {
+    .blog-header {
+        padding: 5.5rem 1.25rem 3rem;
+    }
+
+    .blog-header h1 {
+        font-size: 1.9rem;
+    }
+
+    .blog-header p {
+        font-size: 0.95rem;
+    }
+
+    .blog-list-section {
+        padding: 2.5rem 1rem 3rem;
+    }
+
+    .blog-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .blog-card-content h3 {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .blog-header {
+        padding: 5rem 1rem 2.5rem;
+    }
+
+    .blog-header h1 {
+        font-size: 1.6rem;
+    }
+
+    .blog-header p {
+        font-size: 0.88rem;
+    }
+
+    .blog-list-section {
+        padding: 2rem 0.75rem 2.5rem;
+    }
+
+    .blog-card-content {
+        padding: 1.15rem 1.2rem;
+    }
+
+    .blog-card-footer {
+        padding: 0.75rem 1.2rem;
+    }
+
+    .blog-pagination a,
+    .blog-pagination span {
+        min-width: 36px;
+        height: 36px;
+        font-size: 0.8rem;
+        padding: 0 0.5rem;
+    }
+}

@@ -1,64 +1,74 @@
 {% extends 'core/base.html' %}
 {% load static %}
 {% block content %}
-<link rel='stylesheet' href='{% static 'core/assets/css/project.css' %}?v=3'>
+<link rel='stylesheet' href='{% static 'core/assets/css/blog.css' %}?v=1'>
 
-<section class='section-page-header'>
-    <div class='container'>
-        <h1>{{ title|default:'Nos Articles' }}</h1>
-        <p>Retrouvez ici toutes nos analyses, tutoriels et reportages sur les dernières innovations en ingénierie.</p>
-    </div>
-</section>
-
-<section class='projet-list-section'>
-    <div class='project-grid'>
-        {% for article in articles %}
-        <a href='{{ article.get_absolute_url }}' class='project-card'>
-            <div class='project-image-wrapper'>
-                {% if article.featured_image %}
-                <img src='{{ article.featured_image.url }}' alt='{{ article.title }}'>
-                {% else %}
-                <img src='{% static 'core/assets/img/starship_carousel2_card4_v2_m.jpg' %}' alt='Image par défaut' style='background: #e2e8f0;'>
-                {% endif %}
-                <span class='badge-difficulty' style='background: var(--accent); color: white;'>{{ article.category.name|default:'Article' }}</span>
-            </div>
-
-            <div class='project-content'>
-                <h3>{{ article.title }}</h3>
-                <p>{{ article.excerpt|default:article.content|striptags|truncatechars:120 }}</p>
-                <div class='project-meta-footer'>
-                    <div class='project-duration'>
-                        <span>{{ article.publication_date|date:'d M Y' }}</span>
-                    </div>
-                    <span class='project-cta'>Lire l'article</span>
-                </div>
-            </div>
-        </a>
-        {% empty %}
-        <div style='grid-column: 1/-1; text-align: center; padding: 4rem;'>
-            <p>Aucun article n'a encore été publié.</p>
+<div class="blog-page">
+    <section class='blog-header'>
+        <div class='container'>
+            <h1>{{ title|default:'Nos Articles' }}</h1>
+            <p>Retrouvez ici toutes nos analyses, tutoriels et reportages sur les dernières innovations en ingénierie.</p>
         </div>
-        {% endfor %}
-    </div>
+    </section>
 
-    {% if articles.paginator.num_pages > 1 %}
-    <nav class='pagination' aria-label='Pagination des articles' style='margin-top: 4rem; display: flex; justify-content: center; gap: 0.5rem;'>
-        {% if articles.has_previous %}
-        <a href='?page={{ articles.previous_page_number }}' class='cta-button secondary' style='width: auto; display: inline-block;'>&laquo; Précédent</a>
-        {% endif %}
+    <section class='blog-list-section'>
+        <div class='blog-grid'>
+            {% for article in articles %}
+            <a href='{{ article.get_absolute_url }}' class='blog-card'>
+                <div class='blog-card-image'>
+                    {% if article.featured_image %}
+                    <img src='{{ article.featured_image.url }}' alt='{{ article.title }}'>
+                    {% else %}
+                    <img src='{% static 'core/assets/img/starship_carousel2_card4_v2_m.jpg' %}' alt='Image par défaut'>
+                    {% endif %}
+                    <span class='blog-card-badge'>{{ article.category.name|default:'Article' }}</span>
+                </div>
 
-        {% for num in articles.paginator.page_range %}
-        {% if num == articles.number %}
-        <span class='cta-button' style='width: auto; display: inline-block; background: var(--accent); color: white;'>{{ num }}</span>
-        {% else %}
-        <a href='?page={{ num }}' class='cta-button secondary' style='width: auto; display: inline-block;'>{{ num }}</a>
-        {% endif %}
-        {% endfor %}
+                <div class='blog-card-content'>
+                    <h3>{{ article.title }}</h3>
+                    <p>{{ article.excerpt|default:article.content|striptags|truncatechars:120 }}</p>
+                </div>
 
-        {% if articles.has_next %}
-        <a href='?page={{ articles.next_page_number }}' class='cta-button secondary' style='width: auto; display: inline-block;'>Suivant &raquo;</a>
+                <div class='blog-card-footer'>
+                    <span class='blog-card-date'>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                        {{ article.publication_date|date:'d M Y' }}
+                    </span>
+                    <span class='blog-card-cta'>Lire l'article</span>
+                </div>
+            </a>
+            {% empty %}
+            <div class='blog-empty-state'>
+                <div class='empty-icon'>📝</div>
+                <p>Aucun article n'a encore été publié.</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if articles.paginator.num_pages > 1 %}
+        <nav class='blog-pagination' aria-label='Pagination des articles'>
+            {% if articles.has_previous %}
+            <a href='?page={{ articles.previous_page_number }}' class='prev-next'>&laquo; Précédent</a>
+            {% endif %}
+
+            {% for num in articles.paginator.page_range %}
+            {% if num == articles.number %}
+            <span class='active'>{{ num }}</span>
+            {% else %}
+            <a href='?page={{ num }}'>{{ num }}</a>
+            {% endif %}
+            {% endfor %}
+
+            {% if articles.has_next %}
+            <a href='?page={{ articles.next_page_number }}' class='prev-next'>Suivant &raquo;</a>
+            {% endif %}
+        </nav>
         {% endif %}
-    </nav>
-    {% endif %}
-</section>
+    </section>
+</div>
 {% endblock content %}
