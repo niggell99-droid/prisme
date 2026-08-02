@@ -2,6 +2,8 @@
 {% load static %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'core/assets/css/pages.css' %}?v=1">
+
 <section class="section-page-header">
     <div class="container">
         <h1>{{ title }}</h1>
@@ -10,7 +12,7 @@
 </section>
 
 <section class="legal-page-section">
-    <div class="container" style="max-width: 900px;">
+    <div class="container legal-container">
         <div class="legal-card">
 
             <h2>Collecte des données</h2>
@@ -32,7 +34,7 @@
             <h2>Vos droits</h2>
             <p>Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, de suppression et d'opposition
                 concernant vos données personnelles. Pour exercer ces droits, contactez-nous via notre
-                <a href="{% url 'contact' %}" style="color: var(--accent);">page de contact</a>.
+                <a href="{% url 'contact' %}" class="legal-link-accent">page de contact</a>.
             </p>
 
             <h2>Cookies</h2>

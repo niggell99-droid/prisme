@@ -21,10 +21,9 @@
             {% csrf_token %}
 
             {% if form.non_field_errors %}
-            <div class="form-errors"
-                style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.5); border-radius: 8px; padding: 0.8rem; margin-bottom: 1.5rem; color: #fca5a5;">
+            <div class="form-errors">
                 {% for error in form.non_field_errors %}
-                <p style="margin:0; font-size:0.9rem;">{{ error }}</p>
+                <p class="form-error-text">{{ error }}</p>
                 {% endfor %}
             </div>
             {% endif %}
@@ -35,8 +34,7 @@
                 {{ field }}
                 {% if field.errors %}
                 {% for error in field.errors %}
-                <small style="color: #fca5a5; font-size: 0.8rem; display: block; margin-top: 0.4rem;">{{ error
-                    }}</small>
+                <small class="field-error">{{ error }}</small>
                 {% endfor %}
                 {% endif %}
             </div>

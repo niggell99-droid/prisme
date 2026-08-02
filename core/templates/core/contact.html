@@ -2,6 +2,8 @@
 {% load static %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'core/assets/css/pages.css' %}?v=1">
+
 <section class="section-page-header">
     <div class="container">
         <h1>{{ title }}</h1>
@@ -10,39 +12,35 @@
 </section>
 
 <section class="legal-page-section">
-    <div class="container" style="max-width: 900px;">
-        <div class="project-grid" style="grid-template-columns: 1fr 1fr; gap: 2rem;">
+    <div class="container legal-container">
+        <div class="contact-grid">
 
-            <div class="legal-card" style="padding: 2.5rem;">
-                <h2 style="margin-top: 0; margin-bottom: 1.5rem;">Informations de contact</h2>
+            <div class="legal-card legal-card-padded">
+                <h2 class="legal-card-title">Informations de contact</h2>
 
-                <div style="margin-bottom: 1.5rem;">
-                    <h3 style="font-size: 1rem; color: var(--muted); margin-bottom: 0.5rem;">Email général</h3>
-                    <a href="mailto:contact@prisme.example"
-                        style="color: var(--accent); font-size: 1.1rem;">contact@prisme.example</a>
+                <div class="contact-info-block">
+                    <h3 class="contact-label">Email général</h3>
+                    <a href="mailto:contact@prisme.example" class="contact-link">contact@prisme.example</a>
                 </div>
 
-                <div style="margin-bottom: 1.5rem;">
-                    <h3 style="font-size: 1rem; color: var(--muted); margin-bottom: 0.5rem;">Support technique</h3>
-                    <a href="mailto:support@prisme.example"
-                        style="color: var(--accent); font-size: 1.1rem;">support@prisme.example</a>
+                <div class="contact-info-block">
+                    <h3 class="contact-label">Support technique</h3>
+                    <a href="mailto:support@prisme.example" class="contact-link">support@prisme.example</a>
                 </div>
 
-                <div style="margin-bottom: 1.5rem;">
-                    <h3 style="font-size: 1rem; color: var(--muted); margin-bottom: 0.5rem;">Partenariats</h3>
-                    <a href="mailto:partnerships@prisme.example"
-                        style="color: var(--accent); font-size: 1.1rem;">partnerships@prisme.example</a>
+                <div class="contact-info-block">
+                    <h3 class="contact-label">Partenariats</h3>
+                    <a href="mailto:partnerships@prisme.example" class="contact-link">partnerships@prisme.example</a>
                 </div>
 
-                <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
-                    <h3 style="margin-bottom: 1rem;">Suivez-nous</h3>
-                    <div class="socials" style="display: flex; gap: 1rem;">
-                        <a href="#" aria-label="LinkedIn" style="opacity: 0.7; transition: opacity 0.2s;">
-                            <img src="{% static 'core/assets/icons/linkedin.svg' %}" alt="LinkedIn"
-                                style="width: 24px;">
+                <div class="contact-separator">
+                    <h3 class="contact-block-title">Suivez-nous</h3>
+                    <div class="contact-socials">
+                        <a href="#" aria-label="LinkedIn" class="contact-social-link">
+                            <img src="{% static 'core/assets/icons/linkedin.svg' %}" alt="LinkedIn" class="contact-social-icon">
                         </a>
-                        <a href="#" aria-label="X (Twitter)" style="opacity: 0.7; transition: opacity 0.2s;">
-                            <svg width="24" height="24" viewBox="0 0 24 24" alt="X logo" style="vertical-align: middle;">
+                        <a href="#" aria-label="X (Twitter)" class="contact-social-link">
+                            <svg width="24" height="24" viewBox="0 0 24 24" alt="X logo" class="contact-social-icon">
                                 <defs>
                                     <linearGradient id="grad-x-contact" x1="0%" y1="0%" x2="100%" y2="100%">
                                         <stop offset="0%" stop-color="#00a8ff"></stop>
@@ -52,36 +50,31 @@
                                 <path fill="url(#grad-x-contact)" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/>
                             </svg>
                         </a>
-                        <a href="#" aria-label="Facebook" style="opacity: 0.7; transition: opacity 0.2s;">
-                            <img src="{% static 'core/assets/icons/facebook.svg' %}" alt="Facebook"
-                                style="width: 24px;">
+                        <a href="#" aria-label="Facebook" class="contact-social-link">
+                            <img src="{% static 'core/assets/icons/facebook.svg' %}" alt="Facebook" class="contact-social-icon">
                         </a>
                     </div>
                 </div>
             </div>
 
-            <div class="legal-card" style="padding: 2.5rem;">
-                <h2 style="margin-top: 0; margin-bottom: 1.5rem;">Autres moyens de nous joindre</h2>
+            <div class="legal-card legal-card-padded">
+                <h2 class="legal-card-title">Autres moyens de nous joindre</h2>
 
-                <div style="margin-bottom: 2rem;">
-                    <h3 style="font-size: 1rem; margin-bottom: 1rem;">Forum communautaire</h3>
-                    <p style="color: var(--muted); margin-bottom: 1rem;">Posez vos questions techniques et échangez avec
-                        la communauté</p>
-                    <a href="{% url 'forum:topic_list' %}" class="cta small-cta" style="display: inline-block;">Accéder
-                        au forum</a>
+                <div class="contact-block-margin">
+                    <h3 class="contact-block-title-small">Forum communautaire</h3>
+                    <p class="contact-block-text">Posez vos questions techniques et échangez avec la communauté</p>
+                    <a href="{% url 'forum:topic_list' %}" class="cta small-cta contact-cta-inline">Accéder au forum</a>
                 </div>
 
-                <div style="margin-bottom: 2rem;">
-                    <h3 style="font-size: 1rem; margin-bottom: 1rem;">Newsletter</h3>
-                    <p style="color: var(--muted); margin-bottom: 1rem;">Recevez nos derniers articles et tutoriels</p>
-                    <a href="#newsletter" class="cta small-cta secondary" style="display: inline-block;"
-                        onclick="document.getElementById('newsletter-email').focus(); return false;">S'abonner</a>
+                <div class="contact-block-margin">
+                    <h3 class="contact-block-title-small">Newsletter</h3>
+                    <p class="contact-block-text">Recevez nos derniers articles et tutoriels</p>
+                    <a href="#newsletter" class="cta small-cta secondary contact-cta-inline" onclick="document.getElementById('newsletter-email').focus(); return false;">S'abonner</a>
                 </div>
 
                 <div>
-                    <h3 style="font-size: 1rem; margin-bottom: 1rem;">Temps de réponse</h3>
-                    <p style="color: var(--muted);">Nous nous efforçons de répondre à tous les messages dans un délai de
-                        48 heures ouvrées.</p>
+                    <h3 class="contact-block-title-small">Temps de réponse</h3>
+                    <p class="contact-block-text">Nous nous efforçons de répondre à tous les messages dans un délai de 48 heures ouvrées.</p>
                 </div>
             </div>
         </div>

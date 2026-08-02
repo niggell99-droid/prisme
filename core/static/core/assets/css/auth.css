@@ -244,3 +244,32 @@ main:has(.auth-page-container) {
     padding: 2rem;
   }
 }
+
+/* --- FORM ERRORS --- */
+.form-errors {
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.5);
+    border-radius: 8px;
+    padding: 0.8rem;
+    margin-bottom: 1.5rem;
+    color: #fca5a5;
+}
+
+.form-error-text {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.field-error {
+    color: #fca5a5;
+    font-size: 0.8rem;
+    display: block;
+    margin-top: 0.4rem;
+}
+
+.field-help {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.75rem;
+    display: block;
+    margin-top: 0.2rem;
+}

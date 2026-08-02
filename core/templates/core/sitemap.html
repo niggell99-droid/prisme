@@ -2,6 +2,8 @@
 {% load static %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'core/assets/css/pages.css' %}?v=1">
+
 <section class="section-page-header">
     <div class="container">
         <h1>{{ title }}</h1>
@@ -9,105 +11,80 @@
     </div>
 </section>
 
-<section class="latest-articles" style="padding: 4rem 0;">
+<section class="latest-articles search-section">
     <div class="container">
-        <div class="project-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+        <div class="project-grid sitemap-grid">
 
             <!-- Main Sections -->
-            <div
-                style="background: rgba(30, 41, 59, 0.4); border-radius: 16px; padding: 2rem; border: 1px solid rgba(255,255,255,0.05);">
-                <h2 style="margin-bottom: 1.5rem; color: var(--accent);">Sections principales</h2>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="margin-bottom: 0.75rem;"><a href="{% url 'home' %}"
-                            style="color: var(--text); text-decoration: none;">→ Accueil</a></li>
-                    <li style="margin-bottom: 0.75rem;"><a href="{% url 'blog:article_list' %}"
-                            style="color: var(--text); text-decoration: none;">→ Articles</a></li>
-                    <li style="margin-bottom: 0.75rem;"><a href="{% url 'projets:projet_list' %}"
-                            style="color: var(--text); text-decoration: none;">→ Projets</a></li>
-                    <li style="margin-bottom: 0.75rem;"><a href="{% url 'forum:topic_list' %}"
-                            style="color: var(--text); text-decoration: none;">→ Forum</a></li>
-                    <li style="margin-bottom: 0.75rem;"><a href="{% url 'forum:topic_list' %}?tab=actu"
-                            style="color: var(--text); text-decoration: none;">→ Actualités</a></li>
-                    <li style="margin-bottom: 0.75rem;"><a href="{% url 'forum:topic_list' %}?tab=live"
-                            style="color: var(--text); text-decoration: none;">→ Live Stream</a></li>
+            <div class="sitemap-card">
+                <h2 class="sitemap-card-title">Sections principales</h2>
+                <ul class="sitemap-list">
+                    <li class="sitemap-list-item"><a href="{% url 'home' %}" class="sitemap-link">→ Accueil</a></li>
+                    <li class="sitemap-list-item"><a href="{% url 'blog:article_list' %}" class="sitemap-link">→ Articles</a></li>
+                    <li class="sitemap-list-item"><a href="{% url 'projets:projet_list' %}" class="sitemap-link">→ Projets</a></li>
+                    <li class="sitemap-list-item"><a href="{% url 'forum:topic_list' %}" class="sitemap-link">→ Forum</a></li>
+                    <li class="sitemap-list-item"><a href="{% url 'forum:topic_list' %}?tab=actu" class="sitemap-link">→ Actualités</a></li>
+                    <li class="sitemap-list-item"><a href="{% url 'forum:topic_list' %}?tab=live" class="sitemap-link">→ Live Stream</a></li>
                 </ul>
             </div>
 
             <!-- Categories -->
-            <div
-                style="background: rgba(30, 41, 59, 0.4); border-radius: 16px; padding: 2rem; border: 1px solid rgba(255,255,255,0.05);">
-                <h2 style="margin-bottom: 1.5rem; color: var(--accent);">Catégories</h2>
-                <ul style="list-style: none; padding: 0;">
+            <div class="sitemap-card">
+                <h2 class="sitemap-card-title">Catégories</h2>
+                <ul class="sitemap-list">
                     {% for category in all_categories %}
-                    <li style="margin-bottom: 0.75rem;">
-                        <a href="{% url 'blog:category_detail' slug=category.slug %}"
-                            style="color: var(--text); text-decoration: none;">→ {{ category.name }}</a>
+                    <li class="sitemap-list-item">
+                        <a href="{% url 'blog:category_detail' slug=category.slug %}" class="sitemap-link">→ {{ category.name }}</a>
                     </li>
                     {% endfor %}
                 </ul>
             </div>
 
             <!-- Recent Articles -->
-            <div
-                style="background: rgba(30, 41, 59, 0.4); border-radius: 16px; padding: 2rem; border: 1px solid rgba(255,255,255,0.05);">
-                <h2 style="margin-bottom: 1.5rem; color: var(--accent);">Articles récents</h2>
-                <ul style="list-style: none; padding: 0;">
+            <div class="sitemap-card">
+                <h2 class="sitemap-card-title">Articles récents</h2>
+                <ul class="sitemap-list">
                     {% for article in recent_articles %}
-                    <li style="margin-bottom: 0.75rem;">
-                        <a href="{{ article.get_absolute_url }}"
-                            style="color: var(--text); text-decoration: none; font-size: 0.95rem;">→ {{
-                            article.title|truncatechars:50 }}</a>
+                    <li class="sitemap-list-item">
+                        <a href="{{ article.get_absolute_url }}" class="sitemap-link sitemap-link-small">→ {{ article.title|truncatechars:50 }}</a>
                     </li>
                     {% endfor %}
                 </ul>
             </div>
 
             <!-- Recent Projects -->
-            <div
-                style="background: rgba(30, 41, 59, 0.4); border-radius: 16px; padding: 2rem; border: 1px solid rgba(255,255,255,0.05);">
-                <h2 style="margin-bottom: 1.5rem; color: var(--accent);">Projets récents</h2>
-                <ul style="list-style: none; padding: 0;">
+            <div class="sitemap-card">
+                <h2 class="sitemap-card-title">Projets récents</h2>
+                <ul class="sitemap-list">
                     {% for project in recent_projects %}
-                    <li style="margin-bottom: 0.75rem;">
-                        <a href="{{ project.get_absolute_url }}"
-                            style="color: var(--text); text-decoration: none; font-size: 0.95rem;">→ {{
-                            project.title|truncatechars:50 }}</a>
+                    <li class="sitemap-list-item">
+                        <a href="{{ project.get_absolute_url }}" class="sitemap-link sitemap-link-small">→ {{ project.title|truncatechars:50 }}</a>
                     </li>
                     {% endfor %}
                 </ul>
             </div>
 
             <!-- Legal -->
-            <div
-                style="background: rgba(30, 41, 59, 0.4); border-radius: 16px; padding: 2rem; border: 1px solid rgba(255,255,255,0.05);">
-                <h2 style="margin-bottom: 1.5rem; color: var(--accent);">Informations légales</h2>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="margin-bottom: 0.75rem;"><a href="{% url 'legal' %}"
-                            style="color: var(--text); text-decoration: none;">→ Mentions légales</a></li>
-                    <li style="margin-bottom: 0.75rem;"><a href="{% url 'privacy' %}"
-                            style="color: var(--text); text-decoration: none;">→ Confidentialité</a></li>
-                    <li style="margin-bottom: 0.75rem;"><a href="{% url 'terms' %}"
-                            style="color: var(--text); text-decoration: none;">→ Conditions d'utilisation</a></li>
-                    <li style="margin-bottom: 0.75rem;"><a href="{% url 'contact' %}"
-                            style="color: var(--text); text-decoration: none;">→ Contact</a></li>
+            <div class="sitemap-card">
+                <h2 class="sitemap-card-title">Informations légales</h2>
+                <ul class="sitemap-list">
+                    <li class="sitemap-list-item"><a href="{% url 'legal' %}" class="sitemap-link">→ Mentions légales</a></li>
+                    <li class="sitemap-list-item"><a href="{% url 'privacy' %}" class="sitemap-link">→ Confidentialité</a></li>
+                    <li class="sitemap-list-item"><a href="{% url 'terms' %}" class="sitemap-link">→ Conditions d'utilisation</a></li>
+                    <li class="sitemap-list-item"><a href="{% url 'contact' %}" class="sitemap-link">→ Contact</a></li>
                 </ul>
             </div>
 
             <!-- User Account -->
-            <div
-                style="background: rgba(30, 41, 59, 0.4); border-radius: 16px; padding: 2rem; border: 1px solid rgba(255,255,255,0.05);">
-                <h2 style="margin-bottom: 1.5rem; color: var(--accent);">Compte utilisateur</h2>
-                <ul style="list-style: none; padding: 0;">
+            <div class="sitemap-card">
+                <h2 class="sitemap-card-title">Compte utilisateur</h2>
+                <ul class="sitemap-list">
                     {% if user.is_authenticated %}
-                    <li style="margin-bottom: 0.75rem;"><a href="{% url 'profil_detail' user.pk %}"
-                            style="color: var(--text); text-decoration: none;">→ Mon profil</a></li>
-                    <li style="margin-bottom: 0.75rem;"><a href="{% url 'logout' %}"
-                            style="color: var(--text); text-decoration: none;">→ Déconnexion</a></li>
+                    <li class="sitemap-list-item"><a href="{% url 'profil_detail' user.pk %}" class="sitemap-link">→ Mon profil</a></li>
+                    <li class="sitemap-list-item"><a href="{% url 'logout' %}" class="sitemap-link">→ Déconnexion</a></li>
                     {% else %}
-                    <li style="margin-bottom: 0.75rem;"><a href="{% url 'login' %}"
-                            style="color: var(--text); text-decoration: none;">→ Connexion</a></li>
-                    <li style="margin-bottom: 0.75rem;"><a href="{% url 'signup' %}"
-                            style="color: var(--text); text-decoration: none;">→ Inscription</a></li>
+                    <li class="sitemap-list-item"><a href="{% url 'login' %}" class="sitemap-link">→ Connexion</a></li>
+                    <li class="sitemap-list-item"><a href="{% url 'signup' %}" class="sitemap-link">→ Inscription</a></li>
                     {% endif %}
                 </ul>
             </div>

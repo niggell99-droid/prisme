@@ -3390,3 +3390,39 @@ body.dark-mode .site-footer {
 		justify-content: center;
 	}
 }
+
+/* --- LAYOUT INLINE FIXES --- */
+.search-form-inline {
+    display: flex;
+    align-items: center;
+}
+
+.mobile-menu-category-label {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    margin: 1rem 0 0.5rem 0;
+}
+
+.mobile-menu-topic-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mobile-menu-topic-arrow {
+    opacity: 0.3;
+}
+
+.nav-link-accent {
+    color: var(--accent) !important;
+}
+
+.nav-link-live {
+    color: #ef4444 !important;
+}
+
+.social-icon-svg {
+    vertical-align: middle;
+}

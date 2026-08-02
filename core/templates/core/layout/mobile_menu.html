@@ -12,9 +12,9 @@
             <nav class="mobile-menu-nav">
                 <ul>
                     <li><a href="{% url 'home' %}">Accueil</a></li>
-                    <li><a href="{% url 'forum:topic_list' %}?tab=actu" style="color: var(--accent);">Actualités</a>
+                    <li><a href="{% url 'forum:topic_list' %}?tab=actu" class="nav-link-accent">Actualités</a>
                     </li>
-                    <li><a href="{% url 'forum:topic_list' %}?tab=live" style="color: #ef4444;">Live Stream</a></li>
+                    <li><a href="{% url 'forum:topic_list' %}?tab=live" class="nav-link-live">Live Stream</a></li>
                     <li><a href="{% url 'blog:article_list' %}">Articles</a></li>
                     <li><a href="{% url 'projets:projet_list' %}">Projets</a></li>
                     <li><a href="{% url 'forum:topic_list' %}">Forum</a></li>
@@ -22,16 +22,14 @@
 
                     {% if all_categories %}
                     <li class="mobile-only menu-separator">
-                        <h4
-                            style="font-size: 0.9rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.05em; margin: 1rem 0 0.5rem 0;">
-                            Catégories</h4>
+                        <h4 class="mobile-menu-category-label">Catégories</h4>
                     </li>
                     {% for category in all_categories %}
                     <li class="mobile-only">
                         <a href="{% url 'blog:category_articles' slug=category.slug %}"
-                            style="display: flex; justify-content: space-between; align-items: center;">
+                            class="mobile-menu-topic-link">
                             {{ category.name }}
-                            <span style="opacity: 0.3;">→</span>
+                            <span class="mobile-menu-topic-arrow">→</span>
                         </a>
                     </li>
                     {% endfor %}

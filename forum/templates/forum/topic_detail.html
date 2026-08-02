@@ -4,23 +4,20 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'core/assets/css/forum.css' %}?v=1">
 
-<section class="community-header small-header"
-    style="background: transparent; padding-top: 2rem; margin-bottom: 2rem; border: none;">
+<section class="community-header small-header topic-detail-header">
     <div class="container">
-        <p class="kicker" style="margin-bottom: 1rem;"><a href="{% url 'forum:topic_list' %}"
-                style="text-decoration: none; color: var(--muted);">← Retour au Forum</a></p>
-        <h1
-            style="font-size: 2.5rem; background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+        <p class="kicker kicker-margin"><a href="{% url 'forum:topic_list' %}" class="topic-back-link">← Retour au Forum</a></p>
+        <h1 class="topic-title-gradient">
             {{ topic.name }}</h1>
-        <p style="font-size: 1.1rem; color: var(--muted); max-width: 800px;">{{ topic.description }}</p>
+        <p class="topic-description">{{ topic.description }}</p>
 
-        <div style="margin-top: 2rem;">
-            <a href="#" class="cta small-cta" style="border-radius: 8px;">+ Nouveau Sujet</a>
+        <div class="topic-actions">
+            <a href="#" class="cta small-cta topic-cta-new">+ Nouveau Sujet</a>
         </div>
     </div>
 </section>
 
-<div class="container" style="min-height: 60vh; padding-bottom: 4rem;">
+<div class="container topic-detail-container">
 
     <div class="thread-list-container">
         {% for thread in threads %}
@@ -41,36 +38,35 @@
             </div>
 
             <div class="thread-stats">
-                <span class="stat-badge" style="background: rgba(99, 102, 241, 0.1); color: #818cf8;">{{
+                <span class="stat-badge stat-badge-replies">{{
                     thread.num_posts }} rép.</span>
-                <span style="font-size: 0.75rem; color: var(--muted);">{{ thread.views }} vues</span>
+                <span class="thread-views-label">{{ thread.views }} vues</span>
             </div>
         </a>
         {% empty %}
-        <div style="padding: 3rem; text-align: center; color: var(--muted);">
+        <div class="forum-empty-state">
             <p>Aucun sujet de discussion pour le moment. Soyez le premier à en lancer un !</p>
         </div>
         {% endfor %}
     </div>
 
     {% if threads.paginator.num_pages > 1 %}
-    <nav class="pagination" aria-label="Pagination des sujets"
-        style="margin-top: 3rem; display: flex; justify-content: center; gap: 0.5rem;">
+    <nav class="pagination forum-pagination" aria-label="Pagination des sujets">
         {% if threads.has_previous %}
-        <a href="?page={{ threads.previous_page_number }}" class="cta-button secondary" style="width: auto;">&laquo;
+        <a href="?page={{ threads.previous_page_number }}" class="cta-button secondary forum-page-btn">&laquo;
             Précédent</a>
         {% endif %}
 
         {% for num in threads.paginator.page_range %}
         {% if num == threads.number %}
-        <span class="cta-button" style="width: auto; background: var(--accent); color: white;">{{ num }}</span>
+        <span class="cta-button forum-page-active">{{ num }}</span>
         {% else %}
-        <a href="?page={{ num }}" class="cta-button secondary" style="width: auto;">{{ num }}</a>
+        <a href="?page={{ num }}" class="cta-button secondary forum-page-btn">{{ num }}</a>
         {% endif %}
         {% endfor %}
 
         {% if threads.has_next %}
-        <a href="?page={{ threads.next_page_number }}" class="cta-button secondary" style="width: auto;">Suivant
+        <a href="?page={{ threads.next_page_number }}" class="cta-button secondary forum-page-btn">Suivant
             &raquo;</a>
         {% endif %}
     </nav>

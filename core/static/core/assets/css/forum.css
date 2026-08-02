@@ -807,3 +807,79 @@ body.dark-mode {
         font-size: 0.88rem;
     }
 }
+
+/* --- TOPIC DETAIL STYLES --- */
+.topic-detail-header {
+    background: transparent;
+    padding-top: 2rem;
+    margin-bottom: 2rem;
+    border: none;
+}
+
+.kicker-margin {
+    margin-bottom: 1rem;
+}
+
+.topic-back-link {
+    text-decoration: none;
+    color: var(--muted);
+}
+
+.topic-title-gradient {
+    font-size: 2.5rem;
+    background: linear-gradient(to right, #fff, #94a3b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.topic-description {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 800px;
+}
+
+.topic-actions {
+    margin-top: 2rem;
+}
+
+.topic-cta-new {
+    border-radius: 8px;
+}
+
+.topic-detail-container {
+    min-height: 60vh;
+    padding-bottom: 4rem;
+}
+
+.stat-badge-replies {
+    background: rgba(99, 102, 241, 0.1);
+    color: #818cf8;
+}
+
+.thread-views-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+}
+
+.forum-empty-state {
+    padding: 3rem;
+    text-align: center;
+    color: var(--muted);
+}
+
+.forum-pagination {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.forum-page-btn {
+    width: auto;
+}
+
+.forum-page-active {
+    width: auto;
+    background: var(--accent);
+    color: white;
+}

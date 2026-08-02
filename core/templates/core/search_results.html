@@ -2,32 +2,32 @@
 {% load static %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static 'core/assets/css/pages.css' %}?v=1">
+
 <section class="section-page-header">
     <div class="container">
         <h1>Résultats de recherche</h1>
         {% if query %}
-        <p>Résultats pour : <strong style="color: var(--accent);">"{{ query }}"</strong></p>
+        <p>Résultats pour : <strong class="search-query-accent">"{{ query }}"</strong></p>
         {% else %}
         <p>Veuillez entrer un terme de recherche</p>
         {% endif %}
     </div>
 </section>
 
-<section class="latest-articles" style="padding: 4rem 0;">
+<section class="latest-articles search-section">
     <div class="container">
         {% if query %}
         {% if total_results > 0 %}
-        <p style="color: var(--muted); margin-bottom: 3rem;">{{ total_results }} résultat{{ total_results|pluralize }}
+        <p class="search-results-count">{{ total_results }} résultat{{ total_results|pluralize }}
             trouvé{{ total_results|pluralize }}</p>
 
         <!-- Articles Results -->
         {% if articles %}
-        <div style="margin-bottom: 4rem;">
-            <h2 style="margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem;">
-                <span style="color: var(--accent);">Articles</span>
-                <span
-                    style="background: var(--accent); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem;">{{
-                    articles.count }}</span>
+        <div class="search-category-block">
+            <h2 class="search-category-header">
+                <span class="search-category-title">Articles</span>
+                <span class="search-category-count">{{ articles.count }}</span>
             </h2>
             <div class="project-grid">
                 {% for article in articles %}
@@ -36,11 +36,9 @@
                         {% if article.featured_image %}
                         <img src="{{ article.featured_image.url }}" alt="{{ article.title }}">
                         {% else %}
-                        <img src="{% static 'core/assets/img/default_article.jpg' %}" alt="Image par défaut"
-                            style="background: #e2e8f0;">
+                        <img src="{% static 'core/assets/img/default_article.jpg' %}" alt="Image par défaut" class="search-article-default-img">
                         {% endif %}
-                        <span class="badge-difficulty" style="background: var(--accent); color: white;">{{
-                            article.category.name|default:"Article" }}</span>
+                        <span class="badge-difficulty search-badge-article">{{ article.category.name|default:"Article" }}</span>
                     </div>
                     <div class="project-content">
                         <h3>{{ article.title }}</h3>
@@ -60,12 +58,10 @@
 
         <!-- Projects Results -->
         {% if projects %}
-        <div style="margin-bottom: 4rem;">
-            <h2 style="margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem;">
-                <span style="color: var(--accent);">Projets</span>
-                <span
-                    style="background: var(--accent); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem;">{{
-                    projects.count }}</span>
+        <div class="search-category-block">
+            <h2 class="search-category-header">
+                <span class="search-category-title">Projets</span>
+                <span class="search-category-count">{{ projects.count }}</span>
             </h2>
             <div class="project-grid">
                 {% for project in projects %}
@@ -74,11 +70,9 @@
                         {% if project.hero %}
                         <img src="{{ project.hero.url }}" alt="{{ project.title }}">
                         {% else %}
-                        <div style="height: 200px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                        </div>
+                        <div class="search-project-placeholder"></div>
                         {% endif %}
-                        <span class="badge-difficulty" style="background: #10b981; color: white;">{{
-                            project.difficulty|default:"Projet" }}</span>
+                        <span class="badge-difficulty search-badge-project">{{ project.difficulty|default:"Projet" }}</span>
                     </div>
                     <div class="project-content">
                         <h3>{{ project.title }}</h3>
@@ -98,16 +92,14 @@
 
         <!-- Forum Threads Results -->
         {% if threads %}
-        <div style="margin-bottom: 4rem;">
-            <h2 style="margin-bottom: 2rem; display: flex; align-items: center; gap: 1rem;">
-                <span style="color: var(--accent);">Discussions du Forum</span>
-                <span
-                    style="background: var(--accent); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem;">{{
-                    threads.count }}</span>
+        <div class="search-category-block">
+            <h2 class="search-category-header">
+                <span class="search-category-title">Discussions du Forum</span>
+                <span class="search-category-count">{{ threads.count }}</span>
             </h2>
             <div class="thread-list-container">
                 {% for thread in threads %}
-                <div class="thread-item" style="cursor: default; opacity: 0.7;">
+                <div class="thread-item search-thread-disabled">
                     {# <a href="{{ thread.get_absolute_url }}" class="thread-item"> #}
                         <img src="{% if thread.starter.profil.avatar %}{{ thread.starter.profil.avatar.url }}{% else %}{% static 'core/assets/icons/default_user.svg' %}{% endif %}"
                             alt="Avatar" class="thread-avatar">
@@ -121,7 +113,7 @@
                         </div>
                         <div class="thread-stats">
                             <span class="stat-badge">{{ thread.posts.count }} rép.</span>
-                            <span style="font-size: 0.75rem; color: var(--muted);">{{ thread.views }} vues</span>
+                            <span class="search-thread-views">{{ thread.views }} vues</span>
                         </div>
                 </div>
                 {% endfor %}
@@ -130,23 +122,18 @@
         {% endif %}
 
         {% else %}
-        <div style="text-align: center; padding: 4rem; background: rgba(30, 41, 59, 0.4); border-radius: 16px;">
-            <h2 style="margin-bottom: 1rem;">Aucun résultat trouvé</h2>
-            <p style="color: var(--muted); margin-bottom: 2rem;">Essayez avec d'autres mots-clés ou parcourez nos
-                catégories</p>
+        <div class="search-empty-state">
+            <h2 class="search-empty-title">Aucun résultat trouvé</h2>
+            <p class="search-empty-text">Essayez avec d'autres mots-clés ou parcourez nos catégories</p>
             <a href="{% url 'blog:article_list' %}" class="cta">Voir tous les articles</a>
         </div>
         {% endif %}
         {% else %}
-        <div style="text-align: center; padding: 4rem; background: rgba(30, 41, 59, 0.4); border-radius: 16px;">
-            <h2 style="margin-bottom: 1rem;">Rechercher sur Prisme</h2>
-            <p style="color: var(--muted); margin-bottom: 2rem;">Utilisez la barre de recherche pour trouver des
-                articles, projets ou discussions</p>
-            <form action="{% url 'search' %}" method="get"
-                style="max-width: 600px; margin: 0 auto; display: flex; gap: 1rem;">
-                <input type="search" name="q" placeholder="Rechercher..."
-                    style="flex: 1; padding: 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2); color: var(--text);"
-                    required>
+        <div class="search-empty-state">
+            <h2 class="search-empty-title">Rechercher sur Prisme</h2>
+            <p class="search-empty-text">Utilisez la barre de recherche pour trouver des articles, projets ou discussions</p>
+            <form action="{% url 'search' %}" method="get" class="search-form-container">
+                <input type="search" name="q" placeholder="Rechercher..." class="search-input" required>
                 <button type="submit" class="cta">Rechercher</button>
             </form>
         </div>

@@ -5,196 +5,12 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'core/assets/css/project.css' %}?v=2">
-<style>
-    /* Specific Detail Styles inline for now, to be moved to project.css later if needed */
-    .project-hero-header {
-        position: relative;
-        height: 60vh;
-        min-height: 400px;
-        width: 100%;
-        overflow: hidden;
-        display: flex;
-        align-items: flex-end;
-    }
-
-    .project-hero-bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: 0;
-    }
-
-    .project-hero-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8));
-        z-index: 1;
-    }
-
-    .project-hero-content {
-        position: relative;
-        z-index: 2;
-        padding: 3rem 1.5rem;
-        max-width: 1200px;
-        margin: 0 auto;
-        width: 100%;
-        color: #fff;
-    }
-
-    .project-hero-content .badge-difficulty {
-        display: inline-block;
-        position: relative;
-        top: auto;
-        right: auto;
-        margin-bottom: 1rem;
-    }
-
-    .project-hero-content h1 {
-        font-size: clamp(2.5rem, 5vw, 4rem);
-        font-weight: 800;
-        margin-bottom: 1rem;
-        line-height: 1.1;
-    }
-
-    .project-layout {
-        display: grid;
-        grid-template-columns: 1fr 350px;
-        gap: 3rem;
-        max-width: 1200px;
-        margin: 4rem auto;
-        padding: 0 1.5rem;
-    }
-
-    .project-main .summary-intro {
-        font-size: 1.25rem;
-        line-height: 1.6;
-        color: var(--text);
-        margin-bottom: 2rem;
-        font-weight: 500;
-    }
-
-    .project-sidebar {
-        position: sticky;
-        top: 120px;
-        height: fit-content;
-    }
-
-    .sidebar-card {
-        background: var(--card);
-        border-radius: 12px;
-        padding: 1.5rem;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        border: 1px solid rgba(0, 0, 0, 0.05);
-        margin-bottom: 2rem;
-    }
-
-    .sidebar-card h3 {
-        font-size: 1.1rem;
-        margin-bottom: 1rem;
-        border-bottom: 2px solid var(--accent);
-        padding-bottom: 0.5rem;
-        display: inline-block;
-    }
-
-    .tech-stack-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-    }
-
-    .tech-badge {
-        background: rgba(30, 136, 229, 0.1);
-        color: var(--accent);
-        padding: 0.3rem 0.8rem;
-        border-radius: 6px;
-        font-size: 0.85rem;
-        font-weight: 600;
-    }
-
-    .project-meta-list li {
-        display: flex;
-        justify-content: space-between;
-        padding: 0.8rem 0;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        font-size: 0.95rem;
-    }
-
-    .project-meta-list li:last-child {
-        border-bottom: none;
-    }
-
-    .cta-button {
-        display: block;
-        width: 100%;
-        text-align: center;
-        background: var(--accent);
-        color: #fff;
-        padding: 1rem;
-        border-radius: 8px;
-        font-weight: 700;
-        margin-bottom: 0.5rem;
-        transition: opacity 0.2s;
-    }
-
-    .cta-button:hover {
-        opacity: 0.9;
-        color: #fff;
-    }
-
-    .cta-button.secondary {
-        background: var(--nav);
-    }
-
-    @media (max-width: 900px) {
-        .project-layout {
-            grid-template-columns: 1fr;
-        }
-
-        .project-hero-header {
-            height: 50vh;
-        }
-    }
-
-    @media (prefers-color-scheme: dark) {
-        .sidebar-card {
-            border-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .tech-badge {
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-        }
-
-        .project-meta-list li {
-            border-bottom-color: rgba(255, 255, 255, 0.1);
-        }
-    }
-
-    body.dark-mode .sidebar-card {
-        border-color: rgba(255, 255, 255, 0.1);
-    }
-
-    body.dark-mode .tech-badge {
-        background: rgba(255, 255, 255, 0.1);
-        color: #fff;
-    }
-
-    body.dark-mode .project-meta-list li {
-        border-bottom-color: rgba(255, 255, 255, 0.1);
-    }
-</style>
 
 <div class="project-hero-header">
     {% if projet.main_image %}
     <img class="project-hero-bg" src="{{ projet.main_image.url }}" alt="{{ projet.title }}">
     {% else %}
-    <div class="project-hero-bg" style="background: linear-gradient(45deg, #0f172a, #334155);"></div>
+    <div class="project-hero-bg project-hero-placeholder-bg"></div>
     {% endif %}
     <div class="project-hero-overlay"></div>
 
@@ -212,17 +28,13 @@
         </div>
 
         {% if projet.images.all %}
-        <section class="project-gallery" style="margin-top: 4rem;">
+        <section class="project-gallery">
             <h2>Galerie du projet</h2>
-            <div class="gallery-grid"
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin-top: 1.5rem;">
+            <div class="gallery-grid">
                 {% for image in projet.images.all %}
-                <figure style="margin:0;">
-                    <img src="{{ image.image.url }}" alt="{{ image.caption|default:projet.title }}"
-                        style="width:100%; border-radius:8px; display:block;">
-                    {% if image.caption %} <figcaption
-                        style="font-size:0.9rem; color:var(--muted); margin-top:0.5rem; font-style:italic;">{{
-                        image.caption }}</figcaption>{% endif %}
+                <figure class="gallery-figure">
+                    <img src="{{ image.image.url }}" alt="{{ image.caption|default:projet.title }}" class="gallery-img">
+                    {% if image.caption %} <figcaption class="gallery-caption">{{ image.caption }}</figcaption>{% endif %}
                 </figure>
                 {% endfor %}
             </div>
@@ -237,7 +49,7 @@
         <!-- Carte Infos Techniques -->
         <div class="sidebar-card">
             <h3>Fiche Technique</h3>
-            <ul class="project-meta-list" style="list-style:none; padding:0; margin:0;">
+            <ul class="project-meta-list">
                 <li>
                     <span class="muted">Durée</span>
                     <strong>{{ projet.duration|default:"Non spécifié" }}</strong>

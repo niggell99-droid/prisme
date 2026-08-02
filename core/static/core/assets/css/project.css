@@ -528,3 +528,45 @@ body.dark-mode .project-meta-list li {
     /* Legacy override if needed */
     display: block;
 }
+
+/* --- PROJECT GALLERY --- */
+.project-gallery {
+    margin-top: 4rem;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.gallery-figure {
+    margin: 0;
+}
+
+.gallery-img {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+}
+
+.gallery-caption {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* --- PROJECT PLACEHOLDER --- */
+.project-placeholder-bg {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #1e293b, #334155);
+}
+
+.project-hero-placeholder-bg {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #0f172a, #334155);
+}
