@@ -12,6 +12,18 @@
 
     {% if hero_article %}
     <section class="hero-featured container" aria-labelledby="hero-title">
+        <div class="hero-image">
+            {% if hero_article.featured_image %}
+            <a href="{{ hero_article.get_absolute_url }}">
+                <img src="{{ hero_article.featured_image.url }}"
+                    alt="image d'illustration pour l'article : {{ hero_article.title }}">
+            </a>
+            {% else %}
+            <!-- Placeholder si pas d'image -->
+            <div class="hero-image-placeholder"></div>
+            {% endif %}
+        </div>
+
         <div class="hero-content">
             {# Afficher la catégorie principale comme un badge #}
             {% if hero_article.category %}
@@ -30,18 +42,6 @@
             <div class="hero-cta-wrapper">
                 <a href="{{ hero_article.get_absolute_url }}" class="cta">Lire l'article</a>
             </div>
-        </div>
-
-        <div class="hero-image">
-            {% if hero_article.featured_image %}
-            <a href="{{ hero_article.get_absolute_url }}">
-                <img src="{{ hero_article.featured_image.url }}"
-                    alt="image d'illustration pour l'article : {{ hero_article.title }}">
-            </a>
-            {% else %}
-            <!-- Placeholder si pas d'image -->
-            <div class="hero-image-placeholder"></div>
-            {% endif %}
         </div>
     </section>
     {% else %}
