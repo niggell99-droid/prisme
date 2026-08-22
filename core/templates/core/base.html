@@ -7,10 +7,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <meta name="description" content="{% block meta_description %}Prisme — tutoriels, projets et analyses sur l'ingénierie, la robotique, la mécatronique et l'IA.{% endblock %}">
+    <meta name="description" content="{% block meta_description %}Transformer les concepts techniques les plus complexes en savoir simple. Tutoriels, projets et analyses sur l'ingénierie, la robotique, la mécatronique et l'IA.{% endblock %}">
 
-    <meta property="og:title" content="{% block og_title %}Prisme — Média & Ingénierie{% endblock %}">
-    <meta property="og:description" content="{% block og_description %}Tutoriels, projets et analyses sur l'ingénierie, la robotique, la mécatronique et l'IA.{% endblock %}">
+    <meta property="og:title" content="{% block og_title %}Prisme — Transformer le complexe en simple{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Transformer les concepts techniques les plus complexes en savoir simple. Tutoriels, projets et analyses sur l'ingénierie, la robotique, la mécatronique et l'IA.{% endblock %}">
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
     <meta property="og:image" content="{% block og_image %}{{ request.scheme }}://{{ request.get_host }}{% static 'core/assets/img/prisme_og.png' %}{% endblock %}">
     <meta property="og:url" content="{{ request.build_absolute_uri }}">
@@ -19,7 +19,7 @@
     <meta name="color-scheme" content="light dark">
 
     <link rel="icon" type="image/png" href="{% static 'favicon.png' %}">
-    <title>{% block title %}Prisme — Média & Ingénierie{% endblock %}</title>
+    <title>{% block title %}Prisme — Transformer le complexe en simple{% endblock %}</title>
 
     <link rel="stylesheet" href="{% static 'core/assets/css/style.css' %}?v=14">
     {% block extra_css %}{% endblock %}
