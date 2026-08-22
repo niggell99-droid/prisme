@@ -330,3 +330,76 @@
 
   window.addEventListener("scroll", updateTarget, { passive: true });
 })();
+
+// ===== Cookie Banner Logic =====
+(() => {
+  const banner = document.getElementById('cookie-banner');
+  const btnAccept = document.getElementById('cookie-accept');
+  const btnDecline = document.getElementById('cookie-decline');
+  const COOKIE_CONSENT_KEY = 'prisme_cookie_consent';
+
+  // Fonction pour activer les scripts bloqués
+  function enableTrackingScripts() {
+    const scripts = document.querySelectorAll('script[type="text/plain"][data-cookie-consent="tracking"]');
+    scripts.forEach(script => {
+      const newScript = document.createElement('script');
+      // Copier tous les attributs sauf type et data-cookie-consent
+      Array.from(script.attributes).forEach(attr => {
+        if (attr.name !== 'type' && attr.name !== 'data-cookie-consent') {
+          newScript.setAttribute(attr.name, attr.value);
+        }
+      });
+      // Mettre le code du script
+      newScript.innerHTML = script.innerHTML;
+      // Remplacer l'ancien script par le nouveau (ce qui déclenche son exécution)
+      script.parentNode.replaceChild(newScript, script);
+    });
+  }
+
+  function setConsent(value) {
+    try {
+      localStorage.setItem(COOKIE_CONSENT_KEY, value);
+    } catch (e) {}
+    
+    if (value === 'accepted') {
+      enableTrackingScripts();
+    }
+    
+    if (banner) hideBanner();
+  }
+
+  function hideBanner() {
+    banner.classList.remove('show');
+    setTimeout(() => {
+      banner.classList.add('hidden');
+    }, 500); // Wait for transition
+  }
+
+  // Check if consent is already given
+  let consentValue = null;
+  try {
+    consentValue = localStorage.getItem(COOKIE_CONSENT_KEY);
+  } catch (e) {}
+
+  if (!consentValue) {
+    // Show banner after a slight delay for better UX
+    if (banner) {
+      setTimeout(() => {
+        banner.classList.remove('hidden');
+        // trigger reflow
+        void banner.offsetWidth;
+        banner.classList.add('show');
+      }, 1500);
+    }
+  } else if (consentValue === 'accepted') {
+    // Si déjà accepté, on charge direct
+    enableTrackingScripts();
+  }
+
+  if (btnAccept) {
+    btnAccept.addEventListener('click', () => setConsent('accepted'));
+  }
+  if (btnDecline) {
+    btnDecline.addEventListener('click', () => setConsent('declined'));
+  }
+})();

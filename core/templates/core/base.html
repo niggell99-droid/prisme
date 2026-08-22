@@ -23,6 +23,14 @@
 
     <link rel="stylesheet" href="{% static 'core/assets/css/style.css' %}?v=14">
     {% block extra_css %}{% endblock %}
+
+    <!-- Exemple de script bloqué par la bannière de cookies (Analytics, etc.) -->
+    <!--
+    <script type="text/plain" data-cookie-consent="tracking">
+        // Ton code Google Analytics ou autre script tiers
+        console.log("Analytics activé !");
+    </script>
+    -->
 </head>
 
 <body>
@@ -41,6 +49,8 @@
     {% block mobile_menu %}
         {% include "core/layout/mobile_menu.html" %}
     {% endblock mobile_menu %}
+
+    {% include "core/includes/cookie_banner.html" %}
 
     <script src="{% static 'core/assets/js/script.js' %}" defer></script>
 
