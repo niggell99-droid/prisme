@@ -1,7 +1,7 @@
 {% extends 'core/base.html' %}
 {% load static %}
 {% block content %}
-<link rel='stylesheet' href='{% static 'core/assets/css/blog.css' %}?v=1'>
+<link rel='stylesheet' href='{% static 'blog/assets/css/blog.css' %}?v=1'>
 
 <div class="blog-page">
     <section class='blog-header'>
@@ -19,7 +19,7 @@
                     {% if article.featured_image %}
                     <img src='{{ article.featured_image.url }}' alt='{{ article.title }}'>
                     {% else %}
-                    <img src='{% static 'core/assets/img/starship_carousel2_card4_v2_m.jpg' %}' alt='Image par défaut'>
+                    <img src='{% static 'blog/assets/img/starship_carousel2_card4_v2_m.jpg' %}' alt='Image par défaut'>
                     {% endif %}
                     <span class='blog-card-badge'>{{ article.category.name|default:'Article' }}</span>
                 </div>
