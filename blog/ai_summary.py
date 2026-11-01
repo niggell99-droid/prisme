@@ -42,13 +42,18 @@ def generate_article_summary(content: str, title: str = "") -> str:
 
     import google.generativeai as genai
 
-    genai.configure(api_key=api_key)
-    model_name = getattr(settings, 'GEMINI_SUMMARY_MODEL', 'gemini-1.5-flash')
-    model = genai.GenerativeModel(model_name)
+    genai.configure(api_key=api_key, transport='rest')
+    preferred_model = getattr(settings, 'GEMINI_SUMMARY_MODEL', None) or os.environ.get('GEMINI_SUMMARY_MODEL') or 'gemini-flash-lite-latest'
+    
+    # Ordre des modèles à tester pour parer aux dépréciations d'alias Google
+    model_candidates = [preferred_model]
+    for fallback in ['gemini-flash-lite-latest', 'gemini-flash-latest']:
+        if fallback not in model_candidates:
+            model_candidates.append(fallback)
 
     prompt = (
         "Tu es un rédacteur en chef et référenceur expert pour un média web moderne qui oeuvre dans l'ingenierie mecatronique avec une philosophie de deconstruction et reconstruction des concepts brique par brique.\n"
-        "Rédige un résumé accrocheur, captivant et concis en français (4 à 6 phrases, environ 250 à 500 caractères) "
+        "Rédige un résumé accrocheur, captivant et concis en français (6 points maximum) "
         "de l'article ci-dessous. Ce résumé servira d'accroche/chapeau (excerpt) sur la page d'accueil et les cartes d'articles.\n\n"
         "RÈGLES STRICTES :\n"
         "1. Donne UNIQUEMENT le texte du résumé, sans aucun guillemet, sans préambule ni commentaire (ex: pas de 'Voici un résumé:').\n"
@@ -59,17 +64,23 @@ def generate_article_summary(content: str, title: str = "") -> str:
 
     prompt += f"\nContenu de l'article :\n{cleaned_text}\n"
 
-    try:
-        response = model.generate_content(prompt)
-        if not response or not response.text:
-            raise RuntimeError("Gemini n'a renvoyé aucune réponse pour ce résumé.")
-        
-        summary = response.text.strip()
-        # Supprimer d'éventuels guillemets englobants
-        if (summary.startswith('"') and summary.endswith('"')) or (summary.startswith('«') and summary.endswith('»')):
-            summary = summary[1:-1].strip()
-        return summary
+    last_error = None
+    for candidate_name in model_candidates:
+        try:
+            model = genai.GenerativeModel(candidate_name)
+            response = model.generate_content(prompt)
+            if not response or not response.text:
+                continue
 
-    except Exception as exc:
-        logger.error(f"Erreur lors de la génération du résumé avec Gemini: {exc}", exc_info=True)
-        raise
+            summary = response.text.strip()
+            # Supprimer d'éventuels guillemets englobants
+            if (summary.startswith('"') and summary.endswith('"')) or (summary.startswith('«') and summary.endswith('»')):
+                summary = summary[1:-1].strip()
+            return summary
+        except Exception as exc:
+            last_error = exc
+            logger.warning(f"Modèle {candidate_name} indisponible ({exc}). Tentative avec le modèle suivant...")
+
+    logger.error(f"Erreur lors de la génération du résumé avec Gemini: {last_error}", exc_info=True)
+    raise last_error or RuntimeError("Impossible de générer le résumé.")
+
