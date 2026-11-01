@@ -338,3 +338,7 @@ SOCIALACCOUNT_PROVIDERS = {
 # DATABASE_URL override is handled above in the Database section
 
 # STORAGES est configuré dans le bloc conditionnel Supabase ci-dessus
+
+# --- CONFIGURATION GOOGLE GEMINI (RÉSUMÉ AUTOMATIQUE DES ARTICLES) ---
+GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', '')
+GEMINI_SUMMARY_MODEL = os.environ.get('GEMINI_SUMMARY_MODEL', 'gemini-1.5-flash')

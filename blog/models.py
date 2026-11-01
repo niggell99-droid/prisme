@@ -95,3 +95,19 @@ class Article(models.Model):
         """
         # 'article_detail' sera le nom de notre URL (voir point 8.3)
         return reverse('blog:article_detail', kwargs={'slug': self.slug})
+
+    def save(self, *args, **kwargs):
+        """
+        Sauvegarde de l'article avec génération automatique du résumé (excerpt)
+        une seule fois lors de la rédaction si le champ est laissé vide.
+        """
+        if not self.excerpt and self.content:
+            try:
+                from .ai_summary import generate_article_summary
+                generated_summary = generate_article_summary(content=self.content, title=self.title)
+                if generated_summary:
+                    self.excerpt = generated_summary
+            except Exception:
+                # Tolérance aux pannes : la sauvegarde de l'article ne doit jamais échouer si l'API IA a un souci
+                pass
+        super().save(*args, **kwargs)

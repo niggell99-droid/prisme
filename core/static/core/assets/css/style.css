@@ -1,4 +1,4 @@
-/*======================================================================
+﻿/*======================================================================
   PRISME - CORE STYLESHEET
   v2.0 - Refactored for modularity and clarity
 
@@ -1015,24 +1015,22 @@ select:focus {
 	transform: translateX(0);
 }
 
-/* Mobile Menu (Left Side) */
+/* Mobile Menu (pleine largeur) */
 .mobile-menu {
 	position: fixed;
 	top: 0;
 	left: 0;
 	height: 100%;
-	width: 280px;
-	background: rgba(11, 18, 32, 0.95);
+	width: 100%;
+	background: linear-gradient(160deg, #0b1220 0%, #0e2034 60%, #0d1a2a 100%);
 	color: #fff;
 	transform: translateX(-100%);
-	transition: transform 0.4s ease;
+	transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 	z-index: 1100;
 	display: flex;
 	flex-direction: column;
-	-webkit-backdrop-filter: blur(8px);
-	backdrop-filter: blur(8px);
-	box-shadow: 4px 0 15px rgba(0, 0, 0, 0.4);
-	will-change: transform, opacity;
+	box-shadow: 4px 0 30px rgba(0, 0, 0, 0.6);
+	will-change: transform;
 }
 
 .mobile-menu.open {
@@ -3504,4 +3502,372 @@ body.dark-mode .cookie-banner {
     .cookie-actions {
         flex-shrink: 0;
     }
+}
+
+/*======================================================================
+  RETOUCHE – Nouveau menu mobile, footer 4 colonnes, dropdowns desktop
+======================================================================*/
+
+/* ---- En-tête du menu mobile ---- */
+.mobile-menu-inner {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.mobile-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: #00000033;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.mobile-menu-logo-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.mobile-menu-logo {
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 10px;
+  object-fit: cover;
+  margin: 0 !important;
+}
+
+.mobile-menu-brand {
+  font-family: 'Inter', 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #00a8ff 0%, #6b21a8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.close-mobile-menu {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 50% !important;
+  cursor: pointer;
+  padding: 0.4rem !important;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: background 0.2s ease, transform 0.25s ease;
+  flex-shrink: 0;
+  filter: none !important;
+  align-self: auto !important;
+}
+
+.close-mobile-menu:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  transform: rotate(90deg);
+}
+
+/* ---- Navigation du menu mobile ---- */
+.mobile-menu-nav {
+  padding: 1rem 0;
+  flex: 1;
+}
+
+.mobile-menu-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Séparateurs de section */
+.mobile-menu-nav li.mobile-menu-separator {
+  padding: 1.25rem 1.5rem 0.4rem;
+}
+
+.mobile-menu-nav li.mobile-menu-separator span {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.mobile-menu-nav a {
+  display: flex !important;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.8rem 1.5rem !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+  font-size: 1rem !important;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  transition: color 0.2s ease, background 0.2s ease, padding-left 0.2s ease !important;
+  transform: none !important;
+  border-radius: 0;
+}
+
+.mobile-menu-nav a svg {
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.mobile-menu-nav a:hover {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  padding-left: 2rem !important;
+  transform: none !important;
+}
+
+.mobile-menu-nav a:hover svg {
+  opacity: 1;
+}
+
+/* ---- Réseaux sociaux bas menu mobile ---- */
+.mobile-menu-socials {
+  padding: 1.25rem 1.5rem 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: auto;
+}
+
+.mobile-socials-label {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 0 0 0.75rem;
+}
+
+.mobile-socials-icons {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.mobile-social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.mobile-social-link img,
+.mobile-social-link svg {
+  filter: invert(1);
+  width: 20px;
+  height: 20px;
+}
+
+.mobile-social-link:hover {
+  background: rgba(30, 136, 229, 0.3);
+  transform: translateY(-2px);
+}
+
+/* ---- Dropdowns desktop ---- */
+.navlinks .has-dropdown {
+  position: relative;
+}
+
+.nav-dropdown-trigger {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 8px 0;
+  transition: color 0.2s ease;
+}
+
+.nav-dropdown-trigger:hover {
+  color: #fff;
+}
+
+.dropdown-arrow {
+  transition: transform 0.25s ease;
+}
+
+.navlinks .has-dropdown.open .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  background: #0e1e30;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 0.5rem 0;
+  min-width: 210px;
+  z-index: 1300;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  list-style: none;
+  margin: 0;
+}
+
+.navlinks .has-dropdown.open .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu a {
+  display: flex !important;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 1.1rem !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-size: 0.95rem;
+  font-weight: 400;
+  transition: color 0.15s ease, background 0.15s ease;
+  transform: none !important;
+}
+
+.dropdown-menu a::after {
+  content: none !important;
+}
+
+.dropdown-menu a:hover {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+  padding-left: 1.1rem !important;
+}
+
+/* ---- Footer 4 colonnes ---- */
+.footer-grid {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1.4fr 1fr 1fr;
+  gap: 2rem 3rem;
+  align-items: start;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Newsletter ligne 2 */
+.footer-newsletter-row {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.footer-newsletter-row .footer-cta {
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+/* Colonne aide */
+.footer-help ul {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.footer-help ul li {
+  margin-bottom: 10px;
+}
+
+.footer-help h4 {
+  margin: 0 0 .5rem;
+  color: #fff;
+  border-left: 3px solid var(--color-accent);
+  padding-left: 10px;
+}
+
+.footer-help a {
+  text-decoration: none;
+  color: #cbd5e1;
+  transition: color 0.2s ease;
+}
+
+.footer-help a:hover {
+  color: var(--color-accent);
+}
+
+/* Étiquettes sous-rubriques footer */
+.footer-sub-label {
+  color: rgba(255, 255, 255, 0.35) !important;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 0.75rem;
+  padding-left: 0;
+  list-style: none;
+  pointer-events: none;
+}
+
+/* Slogan footer */
+.footer-slogan {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0.5rem 0 0;
+  line-height: 1.5;
+}
+
+/* ---- Footer responsive (tablettes) ---- */
+@media (max-width: 900px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1.5rem 2rem;
+  }
+}
+
+/* ---- Footer responsive (mobiles) ---- */
+@media (max-width: 560px) {
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+  }
+
+  .footer-about {
+    text-align: center;
+  }
+
+  .footer-grid h4,
+  .footer-help h4 {
+    text-align: center;
+    border-left: none;
+    border-bottom: 2px solid var(--color-accent);
+    padding-left: 0;
+    padding-bottom: 0.4rem;
+  }
+
+  .footer-grid ul {
+    text-align: center;
+  }
+
+  .footer-grid .socials {
+    justify-content: center;
+  }
 }

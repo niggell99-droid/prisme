@@ -403,3 +403,58 @@
     btnDecline.addEventListener('click', () => setConsent('declined'));
   }
 })();
+
+// ============================================================
+// DROPDOWNS DESKTOP (Programme, Participer)
+// ============================================================
+(function initDropdowns() {
+  const triggers = document.querySelectorAll('.nav-dropdown-trigger');
+  if (!triggers.length) return;
+
+  // Toggle dropdown au clic
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const parent = this.closest('.has-dropdown');
+      const isOpen = parent.classList.contains('open');
+
+      // Fermer tous les dropdowns ouverts
+      document.querySelectorAll('.has-dropdown.open').forEach(d => {
+        d.classList.remove('open');
+        d.querySelector('.nav-dropdown-trigger')?.setAttribute('aria-expanded', 'false');
+      });
+
+      // Ouvrir celui-ci si pas déjà ouvert
+      if (!isOpen) {
+        parent.classList.add('open');
+        this.setAttribute('aria-expanded', 'true');
+      }
+    });
+
+    // Accessible au clavier
+    trigger.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.click();
+      }
+    });
+  });
+
+  // Fermer en cliquant ailleurs
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.has-dropdown.open').forEach(d => {
+      d.classList.remove('open');
+      d.querySelector('.nav-dropdown-trigger')?.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Fermer avec Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.has-dropdown.open').forEach(d => {
+        d.classList.remove('open');
+        d.querySelector('.nav-dropdown-trigger')?.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+})();

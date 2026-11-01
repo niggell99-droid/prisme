@@ -10,7 +10,7 @@
             </div>
 
             <div class="nav-center">
-                <button type="button" class="hamburger" aria-label="Ouvrir le menu" aria-expanded="false"
+                <button type="button" class="hamburger" id="hamburger-btn" aria-label="Ouvrir le menu" aria-expanded="false"
                     aria-controls="primary-navigation">
                     <span></span>
                     <span></span>
@@ -20,17 +20,191 @@
                 <div id="primary-navigation" class="navlinks" data-visible="false">
                     <ul>
                         <li><a href="{% url 'home' %}">Accueil</a></li>
-                        <li><a href="{% url 'forum:topic_list' %}?tab=actu">Actu</a></li>
                         <li><a href="{% url 'blog:article_list' %}">Blog</a></li>
                         <li><a href="{% url 'projets:projet_list' %}">Projets</a></li>
-                        <li><a href="{% url 'forum:topic_list' %}?tab=live">Live</a></li>
                         <li><a href="{% url 'forum:topic_list' %}">Forum</a></li>
+                        <!-- Programme dropdown -->
+                        <li class="has-dropdown">
+                            <button class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+                                Programme
+                                <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+                                    <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                            <ul class="dropdown-menu" aria-label="Programme">
+                                <li><a href="#">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                                    Ateliers
+                                </a></li>
+                                <li><a href="#">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                    Conférences
+                                </a></li>
+                                <li><a href="#">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                    Exposants
+                                </a></li>
+                            </ul>
+                        </li>
+                        <!-- Participer dropdown -->
+                        <li class="has-dropdown">
+                            <button class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+                                Participer
+                                <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+                                    <path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                            <ul class="dropdown-menu" aria-label="Participer">
+                                <li><a href="{% url 'projets:submit' %}">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+                                    Soumettre un projet
+                                </a></li>
+                                <li><a href="#">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                                    Devenir exposant
+                                </a></li>
+                                <li><a href="#">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                    Devenir partenaire
+                                </a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>
 
             <!-- Overlay pour le menu mobile -->
-            <div class="nav-overlay"></div>
+            <div class="mobile-menu-overlay" id="mobile-overlay"></div>
+
+            <!-- Menu Mobile pleine largeur -->
+            <div class="mobile-menu" id="mobile-menu" aria-hidden="true" role="dialog" aria-label="Menu de navigation">
+                <div class="mobile-menu-inner">
+                    <!-- Header du menu mobile -->
+                    <div class="mobile-menu-header">
+                        <a href="{% url 'home' %}" class="mobile-menu-logo-link">
+                            <img src="{% static 'core/assets/img/logo/prisme_logo_v3.png' %}" alt="Logo Prisme" class="mobile-menu-logo">
+                            <span class="mobile-menu-brand notranslate" translate="no">Prisme</span>
+                        </a>
+                        <button class="close-mobile-menu" id="close-mobile-menu" aria-label="Fermer le menu">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Navigation principale -->
+                    <nav class="mobile-menu-nav" aria-label="Navigation mobile">
+                        <ul>
+                            <li>
+                                <a href="{% url 'home' %}">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                                    Accueil
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'blog:article_list' %}">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                    Blog
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'projets:projet_list' %}">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+                                    Projets
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'forum:topic_list' %}">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                                    Forum
+                                </a>
+                            </li>
+
+                            <!-- Séparateur Programme -->
+                            <li class="mobile-menu-separator"><span>Programme</span></li>
+                            <li>
+                                <a href="#">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                                    Ateliers
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg>
+                                    Conférences
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                                    Exposants
+                                </a>
+                            </li>
+
+                            <!-- Séparateur Participer -->
+                            <li class="mobile-menu-separator"><span>Participer</span></li>
+                            <li>
+                                <a href="{% url 'projets:submit' %}">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                    Soumettre un projet
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                                    Devenir exposant
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                                    Devenir partenaire
+                                </a>
+                            </li>
+
+                            <!-- Séparateur Mon compte -->
+                            <li class="mobile-menu-separator"><span>Mon espace</span></li>
+                            <li>
+                                {% if user.is_authenticated %}
+                                <a href="{% url 'profil_detail' user.pk %}">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                    Mon profil
+                                </a>
+                                {% else %}
+                                <a href="{% url 'signup' %}">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                    Connexion / Compte
+                                </a>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <!-- Réseaux sociaux en bas -->
+                    <div class="mobile-menu-socials">
+                        <p class="mobile-socials-label">Suivez-nous</p>
+                        <div class="mobile-socials-icons">
+                            <a href="#" aria-label="LinkedIn" class="mobile-social-link">
+                                <img src="{% static 'core/assets/icons/linkedin.svg' %}" alt="LinkedIn" width="24" height="24">
+                            </a>
+                            <a href="#" aria-label="X (Twitter)" class="mobile-social-link">
+                                <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+                                    <defs>
+                                        <linearGradient id="grad-x-mob" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stop-color="#00a8ff"></stop>
+                                            <stop offset="100%" stop-color="#6b21a8"></stop>
+                                        </linearGradient>
+                                    </defs>
+                                    <path fill="url(#grad-x-mob)" d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/>
+                                </svg>
+                            </a>
+                            <a href="#" aria-label="Facebook" class="mobile-social-link">
+                                <img src="{% static 'core/assets/icons/facebook.svg' %}" alt="Facebook" width="24" height="24">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="nav-right">
                 <div class="search">
@@ -66,8 +240,6 @@
                 {% if user.is_authenticated %}
                 <a href="{% url 'profil_detail' user.pk %}" class="profile-link" aria-label="Mon profil">
                     <div class="profile-picture-container">
-                        {# Supposons que user.profile.image contienne l'URL de la photo de profil #}
-                        {# Si user.profile.image est vide, utilisez une image par défaut #}
                         {% if user.profil.avatar %}
                         <img src="{{ user.profil.avatar.url }}" alt="Photo de profil de {{ user.username }}"
                             class="profile-picture">
@@ -78,7 +250,6 @@
                     </div>
                 </a>
                 {% else %}
-                {# Icone SVG qui mène à la page de connexion #}
                 <a href="{% url 'signup' %}" class="icon-btn login-icon-btn" aria-label="Se connecter">
                     <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                         <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zM3 21v-1a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v1"
@@ -88,20 +259,29 @@
                 </a>
                 {% endif %}
         </nav>
+
         {% block secondary_nav %}
-        {% if all_categories %}
-        <nav class="secondary-nav">
+        <nav class="secondary-nav" aria-label="Rubriques thématiques">
             <div class="container">
                 <ul class="category-list">
-                    <li><a href="{% url 'blog:article_list' %}" class="active">Toutes</a></li>
-                    {% for category in all_categories %}
-                    <li><a href="{% url 'blog:category_articles' slug=category.slug %}">{{ category.name }}</a></li>
-                    {% endfor %}
+                    <li><a href="{% url 'blog:article_list' %}" class="active">Tous</a></li>
+                    <li><a href="{% url 'blog:article_list' %}?categorie=ia">IA</a></li>
+                    <li><a href="{% url 'blog:article_list' %}?categorie=bio-mecanique">Bio-mécanique</a></li>
+                    <li><a href="{% url 'blog:article_list' %}?categorie=electronique">Électronique</a></li>
+                    <li><a href="{% url 'blog:article_list' %}?categorie=science">Science</a></li>
+                    <li><a href="{% url 'blog:article_list' %}?categorie=aerospatiale">Aérospatiale</a></li>
+                    <li><a href="{% url 'blog:article_list' %}?categorie=energie">Énergie</a></li>
+                    <li><a href="{% url 'blog:article_list' %}?categorie=robotique">Robotique</a></li>
+                    <li><a href="{% url 'blog:article_list' %}?categorie=telecom">Télécom</a></li>
+                    <li><a href="{% url 'blog:article_list' %}?categorie=bricolage">Bricolage</a></li>
+                    <li><a href="{% url 'blog:article_list' %}?categorie=outillage">Outillage</a></li>
+                    <li><a href="#">Expo</a></li>
+                    <li><a href="#">Infos pratiques</a></li>
+                    <li><a href="#">Presse</a></li>
                 </ul>
                 <a href="#" class="cta cta-subscribe-desktop">S'abonner</a>
             </div>
         </nav>
-        {% endif %}
         {% endblock secondary_nav %}
 
         <div class="scroll-progress"></div>

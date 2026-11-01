@@ -1,0 +1,34 @@
+{% extends "core/base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'projets/assets/css/project.css' %}?v=1">
+
+<section class="section-page-header">
+    <div class="container">
+        <h1>{{ title }}</h1>
+        <p>Partagez votre projet d'ingénierie avec la communauté Prisme.</p>
+    </div>
+</section>
+
+<section class="projet-list-section">
+    <div class="container" style="max-width: 800px; margin: 2rem auto; padding: 2rem;">
+        <div class="submit-info" style="text-align: center; padding: 3rem 1rem;">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.5; margin-bottom: 1rem;">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="12" y1="18" x2="12" y2="12"/>
+                <line x1="9" y1="15" x2="15" y2="15"/>
+            </svg>
+            <h2>Formulaire de soumission</h2>
+            <p style="max-width: 500px; margin: 1rem auto; opacity: 0.7;">
+                Le formulaire de soumission de projet sera bientôt disponible. 
+                En attendant, vous pouvez nous contacter directement pour partager votre projet.
+            </p>
+            <a href="{% url 'contact' %}" class="cta" style="display: inline-block; margin-top: 1.5rem; padding: 0.8rem 2rem; text-decoration: none;">
+                Nous contacter
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock content %}

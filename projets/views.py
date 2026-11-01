@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .models import Projet
 from blog.models import Category
 from core.forms import CommentForm
@@ -32,3 +33,12 @@ def projet_detail(request, slug):
         # La galerie est disponible via projet.images.all dans le template
     }
     return render(request, 'projets/detail.html', context)
+
+@login_required
+def submit_projet(request):
+    """Vue pour la page de soumission d'un projet."""
+    context = {
+        'title': 'Soumettre un projet',
+        'all_categories': Category.objects.all(),
+    }
+    return render(request, 'projets/submit.html', context)

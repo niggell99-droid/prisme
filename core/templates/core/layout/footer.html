@@ -1,11 +1,13 @@
 {% load static %}
 <footer role="contentinfo" class="site-footer">
+    <!-- Ligne 1 : 4 colonnes -->
     <div class="footer-grid">
+        <!-- Colonne 1 : Logo + réseaux sociaux -->
         <div class="footer-about">
             <div class="footer-bottom-logo">
                 <img src="{% static 'core/assets/img/logo/prisme_logo_v3.png' %}" alt="Logo Prisme"
                     class="footer-logo">
-                <p>Transformer le complexe en simple.</p>
+                <p class="footer-slogan">Transformer le plus complexe en plus simple.</p>
             </div>
             <div class="socials">
                 <a href="#" aria-label="LinkedIn">
@@ -28,29 +30,53 @@
             </div>
         </div>
 
+        <!-- Colonne 2 : Navigation -->
         <nav class="footer-nav" aria-label="Navigation du pied de page">
-            <h4>Catégories</h4>
+            <h4>Navigation</h4>
             <ul>
-                <li><a href="{% url 'blog:article_list' %}">Tous les articles</a></li>
-                {% for category in all_categories|slice:":6" %}
-                <li><a href="{% url 'blog:category_detail' slug=category.slug %}">{{ category.name }}</a></li>
-                {% endfor %}
+                <li><a href="{% url 'home' %}">Accueil</a></li>
+                <li><a href="{% url 'blog:article_list' %}">Blog</a></li>
                 <li><a href="{% url 'projets:projet_list' %}">Projets</a></li>
                 <li><a href="{% url 'forum:topic_list' %}">Forum</a></li>
+                <li><a href="#">Expo</a></li>
+                <li><a href="#">Infos pratiques</a></li>
+                <li><a href="#">Presse</a></li>
+                <li class="footer-sub-label">Programme</li>
+                <li><a href="#">— Ateliers</a></li>
+                <li><a href="#">— Conférences</a></li>
+                <li><a href="#">— Exposants</a></li>
+                <li class="footer-sub-label">Participer</li>
+                <li><a href="{% url 'projets:submit' %}">— Soumettre un projet</a></li>
+                <li><a href="#">— Devenir exposant</a></li>
+                <li><a href="#">— Devenir partenaire</a></li>
             </ul>
         </nav>
 
+        <!-- Colonne 3 : Légal & Contact -->
         <div class="footer-legal">
-            <h4>Légal & Contact</h4>
+            <h4>Légal &amp; Contact</h4>
             <ul>
                 <li><a href="{% url 'legal' %}">Mentions légales</a></li>
+                <li><a href="{% url 'privacy' %}">Données personnelles</a></li>
                 <li><a href="{% url 'privacy' %}">Confidentialité</a></li>
-                <li><a href="{% url 'terms' %}">Conditions d'utilisation</a></li>
+                <li><a href="#">Cookies</a></li>
                 <li><a href="{% url 'contact' %}">Contact</a></li>
-                <li><a href="{% url 'sitemap' %}">Plan du site</a></li>
             </ul>
         </div>
 
+        <!-- Colonne 4 : Aide & Plan du site -->
+        <div class="footer-help">
+            <h4>Aide &amp; Plan du site</h4>
+            <ul>
+                <li><a href="#">Aide</a></li>
+                <li><a href="{% url 'sitemap' %}">Plan du site</a></li>
+                <li><a href="{% url 'terms' %}">Conditions d'utilisation</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Ligne 2 : Newsletter (centré) -->
+    <div class="footer-newsletter-row">
         <aside class="footer-cta" aria-labelledby="newsletter-title">
             <h4 id="newsletter-title">Restez informé</h4>
             <p>Abonnez-vous à la newsletter pour ne rien rater.</p>
@@ -63,7 +89,9 @@
             </form>
         </aside>
     </div>
+
+    <!-- Ligne 3 : Copyright (centré) -->
     <div class="footer-bottom">
-        <p>&copy; 2025 Prisme — Développé par Niggell O'brien</p>
-    </div>    
+        <p>&copy; 2025 Prisme &mdash; Développé par Niggell O'brien</p>
+    </div>
 </footer>
